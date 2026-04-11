@@ -1,8 +1,21 @@
 # 🔒🤖 Kensei AI Foundations
 
+
+
 > **KENSEI CYBER AI ACADEMY — 100% GRATUITO**
 > O mercado é AI-first. Sua formação também precisa ser.
 > 6 meses de mentoria prática integrando IA, Dados e Cybersecurity. Só precisa de vontade e disposição.
+
+| O **Kensei AI Foundations** é uma jornada prática para quem quer entrar de vez no universo de **IA, dados, programação e automação**, mesmo começando do zero. Aqui, o foco não é só teoria: você aprende construindo projetos reais, usando IA como copiloto e desenvolvendo as competências que o mercado já exige hoje. Ao longo de 8 semanas, você vai evoluir em ritmo progressivo, com desafios mão na massa, apoio da comunidade e um portfólio que mostra sua capacidade de resolver problemas de verdade. Se o objetivo é construir uma carreira **AI-first** com base sólida e visão aplicada para tecnologia e cybersecurity, este curso é o ponto de partida. |
+|:---:|
+| |
+|  <a href="https://kensei.seg.br/lab" target="_blank"><img style="margin: 10px" height="100" width="300" src="img/logo_kensei.png" alt="Logos Kensei"/></a> |
+
+---
+
+<p align="center">
+    <img src="img/01-Kensei_AI_Foundations_Aula_Inaugural.png" alt="Semana 2 - Vibe Coding" width="1100">
+</p>
 
 ---
 
