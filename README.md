@@ -160,7 +160,7 @@ Pensamento AI-first                    Projeto capstone completo
 | 📂 **Tudo no GitHub** | Portfólio profissional desde a semana 1 |
 | 🤖 **IA como copiloto** | Aprender COM IA, não sobre IA teórica |
 | 💬 **Comunidade ativa** | WhatsApp + Discord para dúvidas e networking |
-| 🎯 **Sem pré-requisito** | Laptop + internet + vontade = suficiente |
+| 🎯 **Pré-requisito** | Laptop + internet + vontade = suficiente |
 
 ---
 
