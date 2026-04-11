@@ -198,8 +198,8 @@ Pensamento AI-first                    Projeto capstone completo
 | Semana | Tema | Status |
 |--------|------|--------|
 | S0 | Aula Inaugural — Bem-vindos à Comunidade | ✅ Concluída |
-| S1 | IA na prática + primeiro repo GitHub | 🔜 Em breve |
-| S2 | Python do zero com copiloto IA | 🔜 Em breve |
+| S1 | IA na prática + primeiro repo GitHub | ✅ Concluída |
+| S2 | Python do zero com copiloto IA | ✅ Concluída |
 | S3 | Dados com Pandas + visualização | 🔜 Em breve |
 | S4 | APIs de IA + assistente de terminal | 🔜 Em breve |
 | S5 | Automação no-code com n8n | 🔜 Em breve |
