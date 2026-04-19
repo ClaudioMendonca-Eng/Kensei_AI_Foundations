@@ -252,6 +252,9 @@ Pensamento AI-first                    Projeto capstone completo
 | `04_gerador_senhas.py` | Gera senhas com opcoes | 5 senhas + salva com timestamp |
 | `05_organizador.py` | Organiza arquivos por extensão | Log por categoria + proteção contra sobrescrita |
 
+**Arquivo-chave:**
+- [`semana-02/README.md`](semana-02/README.md)
+
 ---
 
 ### Semana 3 — Dados com Pandas + Dashboard
@@ -265,9 +268,9 @@ Pensamento AI-first                    Projeto capstone completo
 - Projeto dockerizado com `semana-03/Dockerfile`.
 
 **Arquivos-chave:**
-- `semana-03/README.md`
-- `semana-03/dashboard.html`
-- `semana-03/cyber/05_visualizacao_ataques.py`
+- [`semana-03/README.md`](semana-03/README.md)
+- [`semana-03/dashboard.html`](semana-03/dashboard.html)
+- [`semana-03/cyber/05_visualizacao_ataques.py`](semana-03/cyber/05_visualizacao_ataques.py)
 
 <p align="center">
     <img src="img/_D__GITHUB_Kensei_AI_Foundations_semana-03_dashboard.html.png" alt="Dashboard Semana 3 - Ciberseguranca" width="900">
@@ -302,7 +305,7 @@ Pensamento AI-first                    Projeto capstone completo
 - geração de plano SOC em `outputs/plano_triagem_soc_v2.md`
 
 **Arquivo-chave:**
-- `semana-04/README.md`
+- [`semana-04/README.md`](semana-04/README.md)
 
 ---
 
