@@ -66,7 +66,7 @@ elif google_key:
     import google.generativeai as genai
     genai.configure(api_key=google_key)
     
-    model = genai.GenerativeModel("gemini-2.0-flash")
+    model = genai.GenerativeModel("gemini-2.5-flash")
     resp = model.generate_content("O que é phishing em 2 frases?")
     
     print("\n🤖 Resposta:")

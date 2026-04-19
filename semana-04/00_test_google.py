@@ -41,7 +41,7 @@ genai.configure(api_key=google_key)
 print("\n⏳ Testando conexão com Gemini...")
 
 try:
-    model = genai.GenerativeModel("gemini-2.0-flash")
+    model = genai.GenerativeModel("gemini-2.5-flash")
     response = model.generate_content("O que é uma API em uma frase?")
     
     print("\n✅ CONEXÃO FUNCIONANDO!")

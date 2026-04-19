@@ -51,7 +51,7 @@ def ask_llm(prompt, system=None, provider=None, temperature=0.3, max_tokens=1200
 
         api_key = os.getenv("GOOGLE_API_KEY")
         genai.configure(api_key=api_key)
-        model_name = os.getenv("GOOGLE_MODEL", "gemini-2.0-flash")
+        model_name = os.getenv("GOOGLE_MODEL", "gemini-2.5-flash")
         model = genai.GenerativeModel(model_name)
 
         full_prompt = prompt if not system else f"Instrucoes de sistema:\n{system}\n\nPedido:\n{prompt}"

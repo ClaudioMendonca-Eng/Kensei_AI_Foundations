@@ -1,4 +1,17 @@
-# SEMANA 4
+| O **Kensei AI Foundations** e uma jornada pratica para quem quer entrar no universo de **IA, dados, programacao e automacao**, mesmo comecando do zero. Aqui, o foco nao e so teoria: voce aprende construindo projetos reais, usando IA como copiloto e desenvolvendo as competencias que o mercado ja exige. Ao longo de 8 semanas, voce evolui com desafios mao na massa, apoio da comunidade e um portfolio que prova sua capacidade de resolver problemas reais. Se o objetivo e construir uma carreira **AI-first** com base solida e visao aplicada para tecnologia e cybersecurity, este curso e o ponto de partida. |
+|:---:|
+| |
+|  <a href="https://kensei.seg.br/lab" target="_blank"><img style="margin: 10px" height="100" width="300" src="../img/logo_kensei.png" alt="Logos Kensei"/></a> |
+
+---
+
+<p align="center">
+    <img src="../img/04-Kensei_AI_Foundations_S04_APIS_IA.png" alt="Semana 4 - APIs de IA" width="1100">
+</p>
+
+---
+
+# SEMANA 4 - APIs de IA
 
 # APIs DE IA
 
@@ -57,8 +70,6 @@ pip install -r requirements.txt
 Copie [.env.example](.env.example) e renomeie para `.env`:
 
 ```env
-OPENAI_API_KEY=sk-sua-chave-aqui
-ANTHROPIC_API_KEY=sk-ant-sua-chave-aqui
 GOOGLE_API_KEY=sua-chave-aqui
 ```
 
@@ -272,6 +283,7 @@ semana-04/
   ├── 05_relatorio_automatico_v2.py  # CSV + API = relatório automático
   ├── 06_ferramenta_soc_api_v2.py    # Ferramenta própria: triagem SOC
   ├── historico/                # Cópia dos projetos antigos (preservados)
+  ├── logs_testes/              # Logs das execuções de validação
   ├── analise.json              # Saída do analisador
   ├── relatorio_gerado.md       # Saída do gerador
   └── README.md                 # Este arquivo
@@ -311,38 +323,25 @@ docker run --rm \
   kensei-semana04 python 00_test_google.py
 ```
 
-### 3.1 Testar OpenAI
-
-Se você já cadastrou a OPENAI_API_KEY:
+Git Bash (MINGW64):
 
 ```bash
-docker run --rm \
-  -v $(pwd)/semana-04/.env:/app/semana-04/.env \
-  kensei-semana04 python -c "import os;from dotenv import load_dotenv;load_dotenv();from openai import OpenAI;client=OpenAI(api_key=os.getenv('OPENAI_API_KEY'));r=client.chat.completions.create(model='gpt-4o-mini',messages=[{'role':'user','content':'Responda apenas: OK'}],max_tokens=5);print(r.choices[0].message.content.strip())"
+MSYS_NO_PATHCONV=1 docker run --rm -v "$(pwd)/semana-04/.env:/app/semana-04/.env" kensei-semana04 python 00_test_google.py
 ```
 
-Windows CMD (uma linha):
-
-```bat
-docker run --rm -v "%cd%\semana-04\.env:/app/semana-04/.env" kensei-semana04 python -c "import os;from dotenv import load_dotenv;load_dotenv();from openai import OpenAI;client=OpenAI(api_key=os.getenv('OPENAI_API_KEY'));r=client.chat.completions.create(model='gpt-4o-mini',messages=[{'role':'user','content':'Responda apenas: OK'}],max_tokens=5);print(r.choices[0].message.content.strip())"
-```
+Se aparecer erro de path no Git Bash (ex: `is not a valid Windows path`), use `MSYS_NO_PATHCONV=1` como no comando acima.
 
 ### 4. Executar scripts no container
 
 Opção A (recomendada): variável de ambiente
 
 ```bash
-# OpenAI (script original)
-docker run --rm \
-  -e OPENAI_API_KEY=sk-sua-chave \
-  kensei-semana04 python 01_hello_api.py
-
 # Google Gemini (script de teste)
 docker run --rm \
   -e GOOGLE_API_KEY=AIza... \
   kensei-semana04 python 00_test_google.py
 
-# Script multi-provider (auto-detecta OpenAI / Google / Anthropic)
+# Script multi-provider (usa Google quando GOOGLE_API_KEY está configurada)
 docker run --rm \
   -e GOOGLE_API_KEY=AIza... \
   kensei-semana04 python 01_hello_api_multi.py
@@ -351,7 +350,7 @@ docker run --rm \
 Exemplo em uma linha para Windows CMD:
 
 ```bat
-docker run --rm -e OPENAI_API_KEY=sk-sua-chave kensei-semana04 python 01_hello_api.py
+docker run --rm -e GOOGLE_API_KEY=AIza... kensei-semana04 python 00_test_google.py
 ```
 
 ### 5. Rodar usando arquivo `.env`
@@ -375,13 +374,13 @@ docker run --rm \
 ### 6. Scripts disponíveis no container
 
 ```bash
-docker run --rm -e OPENAI_API_KEY=sk-xxx kensei-semana04 python 01_hello_api.py
-docker run --rm -e OPENAI_API_KEY=sk-xxx kensei-semana04 python 02_assistente.py
-docker run --rm -e OPENAI_API_KEY=sk-xxx kensei-semana04 python 03_analisador.py
-docker run --rm -e OPENAI_API_KEY=sk-xxx kensei-semana04 python 04_tradutor.py
-docker run --rm -e OPENAI_API_KEY=sk-xxx kensei-semana04 python 05_gerador_relatorios.py
 docker run --rm -e GOOGLE_API_KEY=AIza... kensei-semana04 python 00_test_google.py
 docker run --rm -e GOOGLE_API_KEY=AIza... kensei-semana04 python 01_hello_api_multi.py
+docker run --rm -e GOOGLE_API_KEY=AIza... kensei-semana04 python 01_hello_api_v2.py
+docker run --rm -e GOOGLE_API_KEY=AIza... kensei-semana04 python 03_analisador_v2.py
+docker run --rm -e GOOGLE_API_KEY=AIza... kensei-semana04 python 04_tradutor_v2.py
+docker run --rm -e GOOGLE_API_KEY=AIza... kensei-semana04 python 05_relatorio_automatico_v2.py
+docker run --rm -e GOOGLE_API_KEY=AIza... kensei-semana04 python 06_ferramenta_soc_api_v2.py
 ```
 
 ### 7. Salvar outputs (JSON, MD)
@@ -390,8 +389,28 @@ Para salvar arquivos gerados no host:
 
 ```bat
 mkdir semana-04\outputs
-docker run --rm -e OPENAI_API_KEY=sk-xxx -v "%cd%\semana-04\outputs:/app/semana-04/outputs" kensei-semana04 python 05_gerador_relatorios.py
+docker run --rm -e GOOGLE_API_KEY=AIza... -v "%cd%\semana-04\outputs:/app/semana-04/outputs" kensei-semana04 python 05_relatorio_automatico_v2.py
 ```
+
+### 8. Suíte de testes com logs (Google)
+
+Para validar os projetos e salvar evidências em arquivo:
+
+```powershell
+# Na raiz do repositório
+$logDir = "semana-04/logs_testes/google_suite_$(Get-Date -Format 'yyyyMMdd_HHmmss')"
+New-Item -ItemType Directory -Force -Path $logDir | Out-Null
+
+docker run --rm --env-file semana-04/.env -e AI_PROVIDER=google kensei-semana04 python 00_test_google.py *> "$logDir/02_00_test_google.log"
+"Explique phishing em 1 frase" | docker run --rm -i --env-file semana-04/.env -e AI_PROVIDER=google kensei-semana04 python 01_hello_api_v2.py *> "$logDir/04_01_hello_api_v2.log"
+@("Me passe 3 boas praticas de SOC", "/sair") | docker run --rm -i --env-file semana-04/.env -e AI_PROVIDER=google kensei-semana04 python 02_assistente_v2.py *> "$logDir/05_02_assistente_v2.log"
+docker run --rm --env-file semana-04/.env -e AI_PROVIDER=google kensei-semana04 python 03_analisador_v2.py *> "$logDir/06_03_analisador_v2.log"
+"Translate this sentence keeping phishing and malware unchanged." | docker run --rm -i --env-file semana-04/.env -e AI_PROVIDER=google kensei-semana04 python 04_tradutor_v2.py *> "$logDir/07_04_tradutor_v2.log"
+docker run --rm --env-file semana-04/.env -e AI_PROVIDER=google kensei-semana04 python 05_relatorio_automatico_v2.py *> "$logDir/08_05_relatorio_automatico_v2.log"
+docker run --rm --env-file semana-04/.env -e AI_PROVIDER=google kensei-semana04 python 06_ferramenta_soc_api_v2.py *> "$logDir/09_06_ferramenta_soc_api_v2.log"
+```
+
+Observação: usar `AI_PROVIDER=google` força todos os scripts a usarem Gemini mesmo que exista outra chave no `.env`.
 
 ---
 
@@ -455,7 +474,7 @@ O script:
 Rodar:
 
 ```bash
-docker run --rm -e OPENAI_API_KEY=sk-xxx kensei-semana04 python 05_relatorio_automatico_v2.py
+docker run --rm -e GOOGLE_API_KEY=AIza... kensei-semana04 python 05_relatorio_automatico_v2.py
 ```
 
 ### 3) Melhorar cada projeto e manter antigos como histórico
@@ -474,16 +493,23 @@ Validação executada em container da semana 4:
 
 - Build da imagem: OK
 - Compilação dos scripts com `py_compile` no container: OK
-- Chave OpenAI carregada no container: OK
-- Chamada real para OpenAI: retornou `429 insufficient_quota`
+- Chave Google carregada no container: OK
+- Chamada real para Gemini: OK
+- Suíte v2 com logs: OK em `semana-04/logs_testes/google_suite_20260419_180653`
 
-Isso indica que a integração está funcional, mas a conta/projeto está sem cota disponível no momento.
+Resultados desta suíte:
+- `00_test_google.py`: conexão Gemini validada
+- `api_provider.py`: provider detectado como `google`
+- `01_hello_api_v2.py`: pergunta e resposta concluídas
+- `02_assistente_v2.py`: turno de conversa + `/sair` concluídos
+- `03_analisador_v2.py`: JSON de análise gerado + `analise_v2.json`
+- `04_tradutor_v2.py`: tradução concluída
+- `05_relatorio_automatico_v2.py`: relatório em `outputs/` com timestamp
+- `06_ferramenta_soc_api_v2.py`: plano SOC em `outputs/plano_triagem_soc_v2.md`
+
+Isso indica que a integração com Google Gemini está funcional.
 
 ### Troubleshooting de quota 429
-
-OpenAI:
-- Verifique billing e uso em: https://platform.openai.com/usage
-- Verifique limites em: https://platform.openai.com/settings/organization/limits
 
 Google Gemini:
 - Verifique limites em: https://ai.google.dev/gemini-api/docs/rate-limits
@@ -525,7 +551,7 @@ git push
 
 - Completar 5 projetos e fazer push
 - Criar ferramenta própria com API
-- Testar API do Claude também
+- Rodar a suíte com `GOOGLE_API_KEY` e revisar `logs_testes/`
 - Dados CSV + API = relatório automático
 - Pedir IA melhorar cada projeto
 

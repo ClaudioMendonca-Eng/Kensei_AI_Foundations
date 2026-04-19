@@ -1,4 +1,17 @@
-# SEMANA 3
+| O **Kensei AI Foundations** e uma jornada pratica para quem quer entrar no universo de **IA, dados, programacao e automacao**, mesmo comecando do zero. Aqui, o foco nao e so teoria: voce aprende construindo projetos reais, usando IA como copiloto e desenvolvendo as competencias que o mercado ja exige. Ao longo de 8 semanas, voce evolui com desafios mao na massa, apoio da comunidade e um portfolio que prova sua capacidade de resolver problemas reais. Se o objetivo e construir uma carreira **AI-first** com base solida e visao aplicada para tecnologia e cybersecurity, este curso e o ponto de partida. |
+|:---:|
+| |
+|  <a href="https://kensei.seg.br/lab" target="_blank"><img style="margin: 10px" height="100" width="300" src="../img/logo_kensei.png" alt="Logos Kensei"/></a> |
+
+---
+
+<p align="center">
+    <img src="../img/03-Kensei_AI_Foundations_S03_DADOS_PANDAS.png" alt="Semana 3 - Dados com Pandas" width="1100">
+</p>
+
+---
+
+# SEMANA 3 - DADOS COM PANDAS
 
 # DADOS COM PANDAS
 

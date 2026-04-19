@@ -11,7 +11,7 @@
 
 ---
 
-# Semana 2 - Python do Zero com Copiloto IA
+# SEMANA 2 - Python do Zero com Copiloto IA
 
 Material pratico da Semana 2 do Kensei AI Foundations 2026.
 
