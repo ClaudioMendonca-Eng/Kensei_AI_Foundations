@@ -213,8 +213,8 @@ Pensamento AI-first                    Projeto capstone completo
 | S0 | Aula Inaugural — Bem-vindos à Comunidade | ✅ Concluída |
 | S1 | IA na prática + primeiro repo GitHub | ✅ Concluída |
 | S2 | Python do zero + Vibe Coding com copiloto IA | ✅ Concluída |
-| S3 | Dados com Pandas + visualização | 🔜 Em breve |
-| S4 | APIs de IA + assistente de terminal | 🔜 Em breve |
+| S3 | Dados com Pandas + visualização | ✅ Concluída |
+| S4 | APIs de IA + assistente de terminal | ✅ Concluída |
 | S5 | Automação no-code com n8n | 🔜 Em breve |
 | S6 | n8n + IA (agentes inteligentes) | 🔜 Em breve |
 | S7 | Apps web com Streamlit + deploy | 🔜 Em breve |

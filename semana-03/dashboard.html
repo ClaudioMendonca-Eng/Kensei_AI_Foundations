@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kensei AI Foundations — Dashboard Semana 3</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --border: #30363d;
+      --text: #e6edf3;
+      --muted: #8b949e;
+      --accent-cyber: #00d4aa;
+      --accent-vendas: #f78166;
+      --accent: var(--accent-cyber);
+      --bar1: #00d4aa;
+      --bar2: #1f6feb;
+      --bar3: #f78166;
+      --bar4: #d2a8ff;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ── HEADER ── */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 32px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; z-index: 100;
+    }
+
+    .logo {
+      display: flex; align-items: center; gap: 10px;
+    }
+    .logo-icon {
+      width: 36px; height: 36px; border-radius: 8px;
+      background: linear-gradient(135deg, #00d4aa, #1f6feb);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+    }
+    .logo-text { font-size: 15px; font-weight: 600; }
+    .logo-sub { font-size: 11px; color: var(--muted); }
+
+    /* ── TOGGLE ── */
+    .toggle-wrap {
+      display: flex; align-items: center;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 4px;
+      gap: 4px;
+    }
+
+    .toggle-btn {
+      padding: 8px 20px;
+      border-radius: 7px;
+      border: none;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      transition: background 0.2s, color 0.2s;
+      background: transparent;
+      color: var(--muted);
+    }
+    .toggle-btn.active-cyber {
+      background: linear-gradient(135deg, #00d4aa22, #1f6feb22);
+      color: var(--accent-cyber);
+      border: 1px solid var(--accent-cyber);
+    }
+    .toggle-btn.active-vendas {
+      background: linear-gradient(135deg, #f7816622, #d2a8ff22);
+      color: var(--accent-vendas);
+      border: 1px solid var(--accent-vendas);
+    }
+
+    /* ── MAIN ── */
+    main { padding: 28px 32px; max-width: 1400px; margin: 0 auto; }
+
+    /* ── HERO TITLE ── */
+    .hero {
+      margin-bottom: 24px;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .hero-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 8px var(--accent);
+      transition: background 0.4s, box-shadow 0.4s;
+    }
+    .hero h1 { font-size: 22px; font-weight: 700; }
+    .hero span { font-size: 13px; color: var(--muted); margin-left: 8px; }
+
+    /* ── KPI CARDS ── */
+    .kpis {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+    .kpi {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 20px;
+      transition: border-color 0.3s;
+    }
+    .kpi:hover { border-color: var(--accent); }
+    .kpi-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+    .kpi-value { font-size: 26px; font-weight: 700; color: var(--accent); transition: color 0.4s; }
+    .kpi-sub { font-size: 11px; color: var(--muted); margin-top: 4px; }
+
+    /* ── CHARTS GRID ── */
+    .charts {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+    .chart-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px 22px;
+      transition: border-color 0.3s;
+    }
+    .chart-card:hover { border-color: var(--accent); }
+    .chart-card.full { grid-column: 1 / -1; }
+    .chart-title {
+      font-size: 13px; font-weight: 600; margin-bottom: 16px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .chart-title::before {
+      content: "";
+      display: inline-block;
+      width: 3px; height: 14px; border-radius: 2px;
+      background: var(--accent);
+      transition: background 0.4s;
+    }
+    .chart-wrap { position: relative; height: 260px; }
+    .chart-wrap canvas { max-height: 260px; }
+
+    /* ── PANEL VISIBILITY ── */
+    #panel-cyber, #panel-vendas { display: none; }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 24px;
+      color: var(--muted);
+      font-size: 12px;
+      border-top: 1px solid var(--border);
+      margin-top: 32px;
+    }
+
+    @media (max-width: 700px) {
+      header { flex-direction: column; gap: 12px; padding: 14px 16px; }
+      main { padding: 16px; }
+      .charts { grid-template-columns: 1fr; }
+      .chart-card.full { grid-column: 1; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="logo-icon">🛡️</div>
+    <div>
+      <div class="logo-text">Kensei AI Foundations</div>
+      <div class="logo-sub">Semana 3 — Dados com Pandas</div>
+    </div>
+  </div>
+
+  <div class="toggle-wrap">
+    <button class="toggle-btn active-cyber" id="btn-cyber" onclick="setSource('cyber')">
+      🔐 Cibersegurança
+    </button>
+    <button class="toggle-btn" id="btn-vendas" onclick="setSource('vendas')">
+      🛒 Vendas
+    </button>
+  </div>
+</header>
+
+<main>
+  <!-- ── CYBER PANEL ── -->
+  <div id="panel-cyber">
+    <div class="hero">
+      <div class="hero-dot" id="hero-dot"></div>
+      <h1 id="hero-title">Análise de Ataques Cibernéticos</h1>
+      <span id="hero-sub">40 000 eventos registrados</span>
+    </div>
+
+    <div class="kpis" id="kpis-cyber">
+      <div class="kpi">
+        <div class="kpi-label">Total de Eventos</div>
+        <div class="kpi-value">40 000</div>
+        <div class="kpi-sub">Dataset completo</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Ataques Bloqueados</div>
+        <div class="kpi-value">33,8%</div>
+        <div class="kpi-sub">13 529 eventos</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Alta Severidade</div>
+        <div class="kpi-value">13 382</div>
+        <div class="kpi-sub">Nível High</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">IoC Detectado</div>
+        <div class="kpi-value">50,0%</div>
+        <div class="kpi-sub">20 000 eventos</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Tipo Mais Frequente</div>
+        <div class="kpi-value" style="font-size:18px">DDoS</div>
+        <div class="kpi-sub">Maior categoria</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Segmento Mais Atacado</div>
+        <div class="kpi-value" style="font-size:18px">Seg. C</div>
+        <div class="kpi-sub">Network Segment</div>
+      </div>
+    </div>
+
+    <div class="charts">
+      <div class="chart-card">
+        <div class="chart-title">Ataques por Tipo</div>
+        <div class="chart-wrap"><canvas id="c-tipo"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">Distribuição por Severidade</div>
+        <div class="chart-wrap"><canvas id="c-sev"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">Ações Tomadas</div>
+        <div class="chart-wrap"><canvas id="c-acao"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">Tipo de Tráfego</div>
+        <div class="chart-wrap"><canvas id="c-trafego"></canvas></div>
+      </div>
+      <div class="chart-card full">
+        <div class="chart-title">Eventos por Ano</div>
+        <div class="chart-wrap"><canvas id="c-ano"></canvas></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── VENDAS PANEL ── -->
+  <div id="panel-vendas">
+    <div class="hero">
+      <div class="hero-dot" id="hero-dot-v"></div>
+      <h1>Análise de Vendas</h1>
+      <span>12 pedidos — Março 2026</span>
+    </div>
+
+    <div class="kpis">
+      <div class="kpi">
+        <div class="kpi-label">Total de Pedidos</div>
+        <div class="kpi-value" style="color:var(--accent-vendas)">12</div>
+        <div class="kpi-sub">Todos os status</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Pedidos Concluídos</div>
+        <div class="kpi-value" style="color:var(--accent-vendas)">10</div>
+        <div class="kpi-sub">83% de conclusão</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Faturamento Total</div>
+        <div class="kpi-value" style="color:var(--accent-vendas);font-size:18px">R$ 18 613</div>
+        <div class="kpi-sub">Pedidos concluídos</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Ticket Médio</div>
+        <div class="kpi-value" style="color:var(--accent-vendas);font-size:18px">R$ 1 861</div>
+        <div class="kpi-sub">Por pedido</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Cidade Líder</div>
+        <div class="kpi-value" style="color:var(--accent-vendas);font-size:16px">São Paulo</div>
+        <div class="kpi-sub">Mais pedidos</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Categoria Líder</div>
+        <div class="kpi-value" style="color:var(--accent-vendas);font-size:16px">Hardware</div>
+        <div class="kpi-sub">Maior faturamento</div>
+      </div>
+    </div>
+
+    <div class="charts">
+      <div class="chart-card">
+        <div class="chart-title">Faturamento por Categoria</div>
+        <div class="chart-wrap"><canvas id="v-cat"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">Pedidos por Cidade</div>
+        <div class="chart-wrap"><canvas id="v-cidade"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">Status dos Pedidos</div>
+        <div class="chart-wrap"><canvas id="v-status"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">Faturamento por Produto (Top 5)</div>
+        <div class="chart-wrap"><canvas id="v-produto"></canvas></div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  Kensei CyberSec Lab · AI Foundations 2026 · Semana 3 — Dados com Pandas
+</footer>
+
+<script>
+  // ── Paleta ──
+  const COLORS = {
+    cyber: ["#00d4aa", "#1f6feb", "#f78166", "#d2a8ff", "#ffa657"],
+    vendas: ["#f78166", "#d2a8ff", "#ffa657", "#79c0ff", "#56d364"],
+  };
+
+  const grid = {
+    color: "#30363d",
+  };
+
+  const fontColor = "#8b949e";
+
+  const baseOpts = (isBar = true) => ({
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { labels: { color: fontColor, font: { size: 12 } } },
+      tooltip: { backgroundColor: "#1c2128", titleColor: "#e6edf3", bodyColor: "#8b949e", borderColor: "#30363d", borderWidth: 1 },
+    },
+    scales: isBar ? {
+      x: { grid: { color: grid.color }, ticks: { color: fontColor } },
+      y: { grid: { color: grid.color }, ticks: { color: fontColor } },
+    } : undefined,
+  });
+
+  // ── CYBER CHARTS ──
+  new Chart(document.getElementById("c-tipo"), {
+    type: "bar",
+    data: {
+      labels: ["DDoS", "Malware", "Intrusion"],
+      datasets: [{ data: [13500, 13370, 13130], backgroundColor: COLORS.cyber, borderRadius: 6, borderSkipped: false }],
+    },
+    options: { ...baseOpts(), plugins: { ...baseOpts().plugins, legend: { display: false } } },
+  });
+
+  new Chart(document.getElementById("c-sev"), {
+    type: "doughnut",
+    data: {
+      labels: ["High", "Medium", "Low"],
+      datasets: [{ data: [13382, 13300, 13318], backgroundColor: ["#f78166", "#ffa657", "#56d364"], borderWidth: 0 }],
+    },
+    options: { ...baseOpts(false), cutout: "65%" },
+  });
+
+  new Chart(document.getElementById("c-acao"), {
+    type: "bar",
+    data: {
+      labels: ["Blocked", "Logged", "Ignored"],
+      datasets: [{ data: [13529, 13360, 13111], backgroundColor: ["#00d4aa", "#1f6feb", "#f78166"], borderRadius: 6, borderSkipped: false }],
+    },
+    options: { ...baseOpts(), plugins: { ...baseOpts().plugins, legend: { display: false } } },
+  });
+
+  new Chart(document.getElementById("c-trafego"), {
+    type: "pie",
+    data: {
+      labels: ["HTTP", "DNS", "FTP"],
+      datasets: [{ data: [13560, 13410, 13030], backgroundColor: ["#1f6feb", "#d2a8ff", "#ffa657"], borderWidth: 0 }],
+    },
+    options: { ...baseOpts(false) },
+  });
+
+  new Chart(document.getElementById("c-ano"), {
+    type: "line",
+    data: {
+      labels: ["2020", "2021", "2022", "2023"],
+      datasets: [{
+        label: "Eventos",
+        data: [10573, 10538, 10750, 8139],
+        borderColor: "#00d4aa",
+        backgroundColor: "#00d4aa18",
+        fill: true,
+        tension: 0.4,
+        pointBackgroundColor: "#00d4aa",
+        pointRadius: 5,
+      }],
+    },
+    options: baseOpts(),
+  });
+
+  // ── VENDAS CHARTS ──
+  new Chart(document.getElementById("v-cat"), {
+    type: "bar",
+    data: {
+      labels: ["Hardware", "Periferico", "Software", "Moveis"],
+      datasets: [{
+        data: [12247.45, 2046.00, 510.00, 0],
+        backgroundColor: COLORS.vendas,
+        borderRadius: 6, borderSkipped: false,
+      }],
+    },
+    options: {
+      ...baseOpts(),
+      plugins: { ...baseOpts().plugins, legend: { display: false } },
+      scales: { ...baseOpts().scales, y: { ...baseOpts().scales.y, ticks: { color: fontColor, callback: v => "R$ " + v.toLocaleString("pt-BR") } } },
+    },
+  });
+
+  new Chart(document.getElementById("v-cidade"), {
+    type: "bar",
+    data: {
+      labels: ["São Paulo", "Rio de Janeiro", "Curitiba", "Belo Horizonte", "Porto Alegre", "Recife", "Salvador"],
+      datasets: [{
+        data: [3, 2, 2, 2, 1, 1, 1],
+        backgroundColor: COLORS.vendas,
+        borderRadius: 6, borderSkipped: false,
+      }],
+    },
+    options: { ...baseOpts(), plugins: { ...baseOpts().plugins, legend: { display: false } } },
+  });
+
+  new Chart(document.getElementById("v-status"), {
+    type: "doughnut",
+    data: {
+      labels: ["Concluída", "Pendente", "Cancelada"],
+      datasets: [{ data: [10, 1, 1], backgroundColor: ["#56d364", "#ffa657", "#f78166"], borderWidth: 0 }],
+    },
+    options: { ...baseOpts(false), cutout: "65%" },
+  });
+
+  new Chart(document.getElementById("v-produto"), {
+    type: "bar",
+    data: {
+      labels: ["Notebook (Karen)", "Notebook (Ana)", "Monitor", "SSD", "Lic. Office"],
+      datasets: [{
+        data: [4940, 4275, 1300, 781.2, 510],
+        backgroundColor: COLORS.vendas,
+        borderRadius: 6, borderSkipped: false,
+      }],
+    },
+    options: {
+      ...baseOpts(),
+      indexAxis: "y",
+      plugins: { ...baseOpts().plugins, legend: { display: false } },
+    },
+  });
+
+  // ── TOGGLE ──
+  function setSource(src) {
+    const isCyber = src === "cyber";
+
+    document.getElementById("panel-cyber").style.display = isCyber ? "block" : "none";
+    document.getElementById("panel-vendas").style.display = isCyber ? "none" : "block";
+
+    const btnCyber = document.getElementById("btn-cyber");
+    const btnVendas = document.getElementById("btn-vendas");
+
+    btnCyber.className = "toggle-btn" + (isCyber ? " active-cyber" : "");
+    btnVendas.className = "toggle-btn" + (!isCyber ? " active-vendas" : "");
+
+    // Troca a variável CSS de accent
+    document.documentElement.style.setProperty("--accent", isCyber ? "var(--accent-cyber)" : "var(--accent-vendas)");
+  }
+
+  // Inicializa no painel cyber
+  setSource("cyber");
+</script>
+</body>
+</html>
