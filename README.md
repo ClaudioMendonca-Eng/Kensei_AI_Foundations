@@ -254,6 +254,58 @@ Pensamento AI-first                    Projeto capstone completo
 
 ---
 
+### Semana 3 — Dados com Pandas + Dashboard
+
+**Pasta:** `semana-03/`
+
+- Pipeline completo com Pandas: exploração, limpeza, filtros, KPIs e visualização.
+- Trilha paralela de cibersegurança em `semana-03/cyber/` com análise de 40.000 eventos.
+- Dashboard interativo em `semana-03/dashboard.html` com alternância **Cibersegurança ↔ Vendas**.
+- Gráficos salvos em `semana-03/graficos/` (vendas + cyber).
+- Projeto dockerizado com `semana-03/Dockerfile`.
+
+**Arquivos-chave:**
+- `semana-03/README.md`
+- `semana-03/dashboard.html`
+- `semana-03/cyber/05_visualizacao_ataques.py`
+
+<p align="center">
+    <img src="img/_D__GITHUB_Kensei_AI_Foundations_semana-03_dashboard.html.png" alt="Dashboard Semana 3 - Ciberseguranca" width="900">
+</p>
+
+<p align="center">
+    <img src="img/_D__GITHUB_Kensei_AI_Foundations_semana-03_dashboard.html_Vendas.png" alt="Dashboard Semana 3 - Vendas" width="900">
+</p>
+
+---
+
+### Semana 4 — APIs de IA + Assistente de Terminal
+
+**Pasta:** `semana-04/`
+
+- Integração com APIs de IA via `.env`, com foco operacional em **Google Gemini**.
+- Camada comum de provedor em `semana-04/api_provider.py`.
+- Projetos v2 de ponta a ponta:
+    - `01_hello_api_v2.py`
+    - `02_assistente_v2.py`
+    - `03_analisador_v2.py`
+    - `04_tradutor_v2.py`
+    - `05_relatorio_automatico_v2.py`
+    - `06_ferramenta_soc_api_v2.py`
+- Docker da semana em `semana-04/Dockerfile`.
+- Validação com suíte de testes e logs em `semana-04/logs_testes/google_suite_20260419_180653/`.
+
+**Validação registrada (Google):**
+- conexão Gemini OK (`00_test_google.py`)
+- provider detectado como `google` (`api_provider.py`)
+- geração de relatório automático em `outputs/`
+- geração de plano SOC em `outputs/plano_triagem_soc_v2.md`
+
+**Arquivo-chave:**
+- `semana-04/README.md`
+
+---
+
 ## Vamos Construir Juntos!
 
 **Kensei AI Foundations | Quartas às 19h | 100% Gratuito**
