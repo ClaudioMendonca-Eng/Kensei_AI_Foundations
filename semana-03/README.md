@@ -251,6 +251,7 @@ Dica pro:
 - Quer graficos mais bonitos? Peca Seaborn.
 - Quer graficos interativos? Peca Plotly.
 
+
 ---
 
 ## Projeto 5: Analise Completa
@@ -311,9 +312,15 @@ docker run --rm -v "%cd%\semana-03\graficos:/app/semana-03/graficos" kensei-sema
 
 Salvos em `semana-03/graficos/`:
 - `cyber_ataques_por_tipo.png` — Barras: DDoS, Malware, Intrusion
+[cyber_ataques_por_tipo](graficos/cyber_ataques_por_tipo.png)
+
 - `cyber_acoes_por_severidade.png` — Agrupado: ações tomadas × severidade
+[cyber_acoes_por_severidade](graficos/cyber_acoes_por_severidade.png)
 - `cyber_trafego_pizza.png` — Pizza: HTTP, DNS, FTP
+[cyber_trafego_pizza](graficos/cyber_trafego_pizza.png)
+
 - `cyber_dashboard.png` — Dashboard com 3 gráficos consolidados
+[cyber_dashboard](graficos/cyber_dashboard.png)
 
 ---
 
@@ -322,6 +329,19 @@ Salvos em `semana-03/graficos/`:
 Arquivo: `semana-03/dashboard.html`
 
 **Abra direto no navegador** — não precisa de servidor.
+Dashboard interativo com Plotly, mostrando KPIs e gráficos de vendas e cibersegurança lado a lado.
+
+### Imagens de Exemplo
+
+**Dashboard - Cibersegurança**
+
+![Dashboard Cibersegurança](../img/_D__GITHUB_Kensei_AI_Foundations_semana-03_dashboard.html.png)
+
+**Dashboard - Vendas**
+
+![Dashboard Vendas](../img/_D__GITHUB_Kensei_AI_Foundations_semana-03_dashboard_vendas.html.png)
+
+
 
 ### Funcionalidades
 
