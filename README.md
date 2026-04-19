@@ -14,7 +14,7 @@
 ---
 
 <p align="center">
-    <img src="img/01-Kensei_AI_Foundations_Aula_Inaugural.png" alt="Semana 2 - Vibe Coding" width="1100">
+    <img src="img/01-Kensei_AI_Foundations_Aula_Inaugural.png" alt="Semana 1 - Aula Inaugural" width="1100">
 </p>
 
 ---
@@ -226,6 +226,13 @@ Pensamento AI-first                    Projeto capstone completo
 
 ### Semana 2 — Python do Zero + Vibe Coding
 
+<p align="center">
+    <a href="/semana-02/README.md" target="_blank"><img style="margin: 10px" height="500" width="800" src="img/02-Kensei_AI_Foundations_S02_Python_Zero.png" alt="Semana 2 - Python do Zero com Copiloto IA"/></a>
+    <p align="center"><strong style="color: #ff3b30;">Aviso: clique na imagem para acessar o material completo da semana 2 - Python do Zero com Copiloto IA</strong></p>
+</p>
+
+---
+
 **Python do Zero** (`semana-02/`)
 
 | Script | O que faz |
@@ -259,6 +266,13 @@ Pensamento AI-first                    Projeto capstone completo
 
 ### Semana 3 — Dados com Pandas + Dashboard
 
+<p align="center">
+    <a href="/semana-03/README.md" target="_blank"><img style="margin: 10px" height="500" width="800" src="img/03-Kensei_AI_Foundations_S03_DADOS_PANDAS.png" alt="Semana 3 - Dados com Pandas"/></a>
+    <p align="center"><strong style="color: #ff3b30;">Aviso: clique na imagem para acessar o material completo da semana 3 - Dados com Pandas</strong></p>
+</p>
+
+---
+
 **Pasta:** `semana-03/`
 
 - Pipeline completo com Pandas: exploração, limpeza, filtros, KPIs e visualização.
@@ -283,6 +297,13 @@ Pensamento AI-first                    Projeto capstone completo
 ---
 
 ### Semana 4 — APIs de IA + Assistente de Terminal
+
+<p align="center">
+    <a href="/semana-04/README.md" target="_blank"><img style="margin: 10px" height="500" width="800" src="img/04-Kensei_AI_Foundations_S04_APIS_IA.png" alt="Semana 4 - APIs de IA"/></a>
+    <p align="center"><strong style="color: #ff3b30;">Aviso: clique na imagem para acessar o material completo da semana 4 - APIs de IA</strong></p>    
+</p>
+
+---
 
 **Pasta:** `semana-04/`
 
