@@ -334,7 +334,7 @@ Dashboard interativo com Plotly, mostrando KPIs e gráficos de vendas e ciberseg
 
 **Dashboard - Vendas**
 
-![Dashboard Vendas](../img/_D__GITHUB_Kensei_AI_Foundations_semana-03_dashboard_vendas.html.png)
+![Dashboard Vendas](../img/_D__GITHUB_Kensei_AI_Foundations_semana-03_dashboard.html_Vendas.png)
 
 
 
