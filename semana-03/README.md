@@ -310,17 +310,12 @@ docker run --rm -v "%cd%\semana-03\graficos:/app/semana-03/graficos" kensei-sema
 
 ### Gráficos Gerados
 
-Salvos em `semana-03/graficos/`:
-- `cyber_ataques_por_tipo.png` — Barras: DDoS, Malware, Intrusion
-[cyber_ataques_por_tipo](graficos/cyber_ataques_por_tipo.png)
-
-- `cyber_acoes_por_severidade.png` — Agrupado: ações tomadas × severidade
-[cyber_acoes_por_severidade](graficos/cyber_acoes_por_severidade.png)
-- `cyber_trafego_pizza.png` — Pizza: HTTP, DNS, FTP
-[cyber_trafego_pizza](graficos/cyber_trafego_pizza.png)
-
-- `cyber_dashboard.png` — Dashboard com 3 gráficos consolidados
-[cyber_dashboard](graficos/cyber_dashboard.png)
+| Salvos em `semana-03/graficos/`:| Imagens PNG |
+|---|---|
+|`cyber_ataques_por_tipo.png` — Barras: DDoS, Malware, Intrusion | <a href="https://kensei.seg.br/lab" target="_blank"><img style="margin: 10px" height="300" width="500" src="graficos/cyber_ataques_por_tipo.png" alt="Logos Kensei"/></a>|
+|`cyber_acoes_por_severidade.png` — Agrupado: ações tomadas × severidade | <a href="https://kensei.seg.br/lab" target="_blank"><img style="margin: 10px" height="300" width="500" src="graficos/cyber_acoes_por_severidade.png" alt="Logos Kensei"/></a>|
+|`cyber_trafego_pizza.png` — Pizza: HTTP, DNS, FTP | <a href="https://kensei.seg.br/lab" target="_blank"><img style="margin: 10px" height="300" width="300" src="graficos/cyber_trafego_pizza.png" alt="Logos Kensei"/></a>|
+|`cyber_dashboard.png` — Dashboard com 3 gráficos consolidados | <a href="https://kensei.seg.br/lab" target="_blank"><img style="margin: 10px" height="300" width="800" src="graficos/cyber_dashboard.png" alt="Logos Kensei"/></a>|
 
 ---
 
