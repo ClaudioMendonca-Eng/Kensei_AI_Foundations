@@ -215,7 +215,7 @@ Pensamento AI-first                    Projeto capstone completo
 | S2 | Python do zero + Vibe Coding com copiloto IA | ✅ Concluída |
 | S3 | Dados com Pandas + visualização | ✅ Concluída |
 | S4 | APIs de IA + assistente de terminal | ✅ Concluída |
-| S5 | Automação no-code com n8n | 🔜 Em breve |
+| S5 | Automação no-code com n8n | ✅ Concluída |
 | S6 | n8n + IA (agentes inteligentes) | 🔜 Em breve |
 | S7 | Apps web com Streamlit + deploy | 🔜 Em breve |
 | S8 | Projeto final + apresentação | 🔜 Em breve |
@@ -327,6 +327,29 @@ Pensamento AI-first                    Projeto capstone completo
 
 **Arquivo-chave:**
 - [`semana-04/README.md`](semana-04/README.md)
+
+---
+
+### Semana 5 — Automação com n8n
+
+**Pasta:** `semana-05/`
+
+- Automação visual no-code com **n8n** self-hosted via Docker.
+- 4 workflows completos exportados em JSON, prontos para importar.
+- Integração com **OpenAI**, **Google Sheets**, **Telegram**, **RSS feeds** e **Email**.
+- API pessoal criada via Webhook — sem servidor, sem deploy.
+
+**Workflows:**
+
+| Arquivo | Fluxo | Integrações |
+|---------|-------|-------------|
+| `01_primeiro_workflow.json` | Manual Trigger → OpenAI → Google Sheets | OpenAI + Sheets |
+| `02_notificador_site.json` | Schedule (5min) → HTTP → IF → Telegram | Telegram |
+| `03_threat_intel_diario.json` | Schedule (8h) → RSS × 3 → Filter → OpenAI → Email | OpenAI + Email |
+| `04_api_sentimento.json` | Webhook POST → OpenAI → Respond JSON | OpenAI + Webhook |
+
+**Arquivo-chave:**
+- [`semana-05/README.md`](semana-05/README.md)
 
 ---
 

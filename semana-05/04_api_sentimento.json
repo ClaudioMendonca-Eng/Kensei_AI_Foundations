@@ -1,0 +1,141 @@
+{
+  "name": "04 - API de Análise de Sentimento + Keywords",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "sentiment",
+        "responseMode": "responseNode",
+        "options": {
+          "allowedOrigins": "*"
+        }
+      },
+      "id": "d4e5f6a7-0004-4000-8000-000000000001",
+      "name": "Webhook - Receber Texto",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [240, 300],
+      "webhookId": "kensei-sentiment-api"
+    },
+    {
+      "parameters": {
+        "resource": "chat",
+        "operation": "complete",
+        "model": "gpt-4o-mini",
+        "messages": {
+          "values": [
+            {
+              "role": "system",
+              "content": "Você é uma API de análise de sentimento. Sempre responda APENAS com JSON válido, sem explicações adicionais, sem markdown."
+            },
+            {
+              "content": "=Analise o seguinte texto e retorne um JSON com exatamente esta estrutura:\n{\n  \"sentimento\": \"positivo\" | \"negativo\" | \"neutro\",\n  \"confianca\": 0.00 a 1.00,\n  \"palavras_chave\": [\"array\", \"com\", \"ate\", \"5\", \"palavras\"],\n  \"resumo\": \"uma frase descrevendo o tom geral\"\n}\n\nTexto para análise:\n\"{{ $json.body.texto }}\""
+            }
+          ]
+        },
+        "options": {
+          "temperature": 0.1
+        }
+      },
+      "id": "d4e5f6a7-0004-4000-8000-000000000002",
+      "name": "OpenAI - Analisar Sentimento",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [460, 300],
+      "credentials": {
+        "openAiApi": {
+          "id": "CONFIGURE_AQUI",
+          "name": "OpenAI API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Parsear o JSON retornado pela OpenAI\nconst raw = $input.first().json.message.content;\n\nlet resultado;\ntry {\n  // Remover possíveis blocos markdown (```json ... ```)\n  const limpo = raw.replace(/```json\\n?/g, '').replace(/```\\n?/g, '').trim();\n  resultado = JSON.parse(limpo);\n} catch (e) {\n  resultado = {\n    sentimento: 'erro',\n    confianca: 0,\n    palavras_chave: [],\n    resumo: 'Erro ao processar resposta da IA',\n    erro_detalhe: raw\n  };\n}\n\nreturn [{\n  json: {\n    ...resultado,\n    texto_recebido: $('Webhook - Receber Texto').first().json.body.texto,\n    processado_em: new Date().toISOString(),\n    modelo: 'gpt-4o-mini',\n    powered_by: 'Kensei AI Foundations - n8n'\n  }\n}];"
+      },
+      "id": "d4e5f6a7-0004-4000-8000-000000000003",
+      "name": "Code - Formatar Resposta",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $json }}",
+        "options": {
+          "responseCode": 200,
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "name": "X-Powered-By",
+                "value": "Kensei-n8n-API"
+              }
+            ]
+          }
+        }
+      },
+      "id": "d4e5f6a7-0004-4000-8000-000000000004",
+      "name": "Respond - Retornar JSON",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [900, 300]
+    }
+  ],
+  "connections": {
+    "Webhook - Receber Texto": {
+      "main": [
+        [
+          {
+            "node": "OpenAI - Analisar Sentimento",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI - Analisar Sentimento": {
+      "main": [
+        [
+          {
+            "node": "Code - Formatar Resposta",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code - Formatar Resposta": {
+      "main": [
+        [
+          {
+            "node": "Respond - Retornar JSON",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "semana05-v1",
+  "meta": {
+    "templateCredsSetupCompleted": false,
+    "instanceId": "kensei-ai-foundations-semana05"
+  },
+  "id": "workflow-04-kensei-s05",
+  "tags": [
+    { "name": "kensei-s05" },
+    { "name": "api" },
+    { "name": "webhook" },
+    { "name": "openai" },
+    { "name": "sentiment-analysis" }
+  ]
+}
