@@ -6,7 +6,7 @@
 ---
 
 <p align="center">
-    <img src="../img/05-Kensei_AI_Foundations_S05_AUTOMACAO_N8N.png" alt="Semana 5 - Automação com n8n" width="1100">
+    <img src="../img/Kensei_AI_Foundations_S05_n8n.png" alt="Semana 5 - Automação com n8n" width="1100">
 </p>
 
 ---
