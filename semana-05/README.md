@@ -285,26 +285,75 @@ semana-05/
 ├── 02_notificador_site.json       ← Monitor de site down com Telegram
 ├── 03_threat_intel_diario.json    ← RSS feeds → IA → Email digest
 ├── 04_api_sentimento.json         ← Webhook API → OpenAI → JSON
-└── README.md                      ← Este arquivo
+├── README.md                      ← Este arquivo
+└── bonus/
+    ├── pack_1999_templates/       ← 1999 templates prontos para n8n
+    │   ├── pack_1999_templates_parte_1.md
+    │   ├── pack_1999_templates_parte_2.md
+    │   ├── pack_1999_templates_parte_3.md
+    │   ├── pack_1999_templates_parte_4.md
+    │   └── pack_1999_templates.md
+    └── pack_mais_58_super_fluxos_templates/   ← 57 super fluxos documentados
+        └── pack_mais_58_super_fluxos_templates.md
 ```
+
+---
+
+## Bônus — Packs de Templates
+
+A pasta `bonus/` contém dois packs extras com centenas de workflows prontos para importar no n8n.
+
+### Pack 1999 Templates
+
+Mais de 1999 templates organizados em 4 partes, cobrindo automações de:
+
+- WhatsApp, Telegram, Instagram, YouTube
+- Google Sheets, Gmail, Google Drive
+- CRM, leads, vendas e SDR
+- Cybersecurity, threat intel e monitoramento
+- IA com OpenAI, Gemini e outros modelos
+- E muito mais...
+
+| Arquivo | Conteúdo |
+|---------|----------|
+| [`pack_1999_templates_parte_1.md`](bonus/pack_1999_templates/pack_1999_templates_parte_1.md) | Templates 1–500 |
+| [`pack_1999_templates_parte_2.md`](bonus/pack_1999_templates/pack_1999_templates_parte_2.md) | Templates 501–1000 |
+| [`pack_1999_templates_parte_3.md`](bonus/pack_1999_templates/pack_1999_templates_parte_3.md) | Templates 1001–1500 |
+| [`pack_1999_templates_parte_4.md`](bonus/pack_1999_templates/pack_1999_templates_parte_4.md) | Templates 1501–1999 |
+
+### Pack 57 Super Fluxos
+
+57 fluxos avançados documentados com diagrama visual (Mermaid) e JSON copiável diretamente para o n8n.
+
+**Como usar:**
+1. Abra [`pack_mais_58_super_fluxos_templates.md`](bonus/pack_mais_58_super_fluxos_templates/pack_mais_58_super_fluxos_templates.md)
+2. Encontre o fluxo desejado no sumário
+3. Copie o bloco `json` da seção **Fluxo (.json)**
+4. No n8n: `+ New Workflow → ⋮ → Import from clipboard`
+
+**Exemplos de fluxos incluídos:**
+
+| Template | Descrição |
+|----------|-----------|
+| Template 3 | Relatório Meta por range com Evolution |
+| Template 8 | Fluxo Vendedor IA |
+| Template 9 | Relatórios Google Ads para múltiplos clientes |
+| Template 21 | Resumidor de Grupos WhatsApp |
+| Template 46 | Scrape YouTube e Resumo Automático |
+| Template 48 | Agente WhatsApp com Planner e pesquisa |
+| Template 52 | Corretor imobiliário AI |
+| Template 53 | Extração de dados de PDFs com IA |
+| Template 57 | Atendimento IA via Telegram |
+| Template 59 | Assistente Ana: Presente de Natal |
 
 ---
 
 ## Para Casa
 
-- [ ] Importar e configurar os 4 workflows
+- [x] Importar e configurar os 4 workflows
 - [ ] Criar **UM workflow seu** (resolve um problema real do seu dia a dia)
 - [ ] Testar e deixar rodando 1 semana
 - [ ] Adicionar prints de cada fluxo funcionando a este README
-- [ ] Pesquisar: o que são agentes de IA? (preview da semana 6)
-
----
-
-## Próxima Semana
-
-**Semana 6 — n8n + IA (Agentes Inteligentes)**
-
-> Vamos transformar workflows em agentes que pensam, decidem e agem!
 
 ---
 
