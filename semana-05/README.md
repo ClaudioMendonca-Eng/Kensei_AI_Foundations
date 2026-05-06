@@ -288,13 +288,15 @@ semana-05/
 ├── README.md                      ← Este arquivo
 └── bonus/
     ├── pack_1999_templates/       ← 1999 templates prontos para n8n
-    │   ├── pack_1999_templates_parte_1.md
-    │   ├── pack_1999_templates_parte_2.md
-    │   ├── pack_1999_templates_parte_3.md
-    │   ├── pack_1999_templates_parte_4.md
+  │   ├── pack_1999_templates_parte_01.md
+  │   ├── ...
+  │   ├── pack_1999_templates_parte_10.md
     │   └── pack_1999_templates.md
     └── pack_mais_58_super_fluxos_templates/   ← 57 super fluxos documentados
-        └── pack_mais_58_super_fluxos_templates.md
+    ├── pack_mais_58_super_fluxos_templates.md
+    ├── pack_mais_58_super_fluxos_templates_parte_01_03_a_12.md
+    ├── ...
+    └── pack_mais_58_super_fluxos_templates_parte_06_53_a_59.md
 ```
 
 ---
@@ -305,7 +307,7 @@ A pasta `bonus/` contém dois packs extras com centenas de workflows prontos par
 
 ### Pack 1999 Templates
 
-Mais de 1999 templates organizados em 4 partes, cobrindo automações de:
+Mais de 1999 templates organizados em 10 partes, cobrindo automações de:
 
 - WhatsApp, Telegram, Instagram, YouTube
 - Google Sheets, Gmail, Google Drive
@@ -316,10 +318,17 @@ Mais de 1999 templates organizados em 4 partes, cobrindo automações de:
 
 | Arquivo | Conteúdo |
 |---------|----------|
-| [`pack_1999_templates_parte_1.md`](bonus/pack_1999_templates/pack_1999_templates_parte_1.md) | Templates 1–500 |
-| [`pack_1999_templates_parte_2.md`](bonus/pack_1999_templates/pack_1999_templates_parte_2.md) | Templates 501–1000 |
-| [`pack_1999_templates_parte_3.md`](bonus/pack_1999_templates/pack_1999_templates_parte_3.md) | Templates 1001–1500 |
-| [`pack_1999_templates_parte_4.md`](bonus/pack_1999_templates/pack_1999_templates_parte_4.md) | Templates 1501–1999 |
+| [`pack_1999_templates.md`](bonus/pack_1999_templates/pack_1999_templates.md) | Índice principal com links para todas as partes |
+| [`pack_1999_templates_parte_01.md`](bonus/pack_1999_templates/pack_1999_templates_parte_01.md) | Parte 1 |
+| [`pack_1999_templates_parte_02.md`](bonus/pack_1999_templates/pack_1999_templates_parte_02.md) | Parte 2 |
+| [`pack_1999_templates_parte_03.md`](bonus/pack_1999_templates/pack_1999_templates_parte_03.md) | Parte 3 |
+| [`pack_1999_templates_parte_04.md`](bonus/pack_1999_templates/pack_1999_templates_parte_04.md) | Parte 4 |
+| [`pack_1999_templates_parte_05.md`](bonus/pack_1999_templates/pack_1999_templates_parte_05.md) | Parte 5 |
+| [`pack_1999_templates_parte_06.md`](bonus/pack_1999_templates/pack_1999_templates_parte_06.md) | Parte 6 |
+| [`pack_1999_templates_parte_07.md`](bonus/pack_1999_templates/pack_1999_templates_parte_07.md) | Parte 7 |
+| [`pack_1999_templates_parte_08.md`](bonus/pack_1999_templates/pack_1999_templates_parte_08.md) | Parte 8 |
+| [`pack_1999_templates_parte_09.md`](bonus/pack_1999_templates/pack_1999_templates_parte_09.md) | Parte 9 |
+| [`pack_1999_templates_parte_10.md`](bonus/pack_1999_templates/pack_1999_templates_parte_10.md) | Parte 10 |
 
 ### Pack 57 Super Fluxos
 
@@ -327,7 +336,7 @@ Mais de 1999 templates organizados em 4 partes, cobrindo automações de:
 
 **Como usar:**
 1. Abra [`pack_mais_58_super_fluxos_templates.md`](bonus/pack_mais_58_super_fluxos_templates/pack_mais_58_super_fluxos_templates.md)
-2. Encontre o fluxo desejado no sumário
+2. Clique na parte desejada no índice (Parte 1 a Parte 6)
 3. Copie o bloco `json` da seção **Fluxo (.json)**
 4. No n8n: `+ New Workflow → ⋮ → Import from clipboard`
 
