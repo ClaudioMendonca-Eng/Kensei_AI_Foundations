@@ -289,7 +289,9 @@ semana-05/
 └── bonus/
     ├── pack_1999_templates/       ← 1999 templates prontos para n8n
     │   ├── pack_1999_templates_parte_01.md
+  │   ├── pack_1999_templates_parte_01_bloco_01_0001_a_0020.md
     │   ├── ...
+  │   ├── pack_1999_templates_parte_10_bloco_10_XXXX_a_XXXX.md
     │   └── pack_1999_templates_parte_10.md
     └── pack_mais_58_super_fluxos_templates/   ← 57 super fluxos documentados
         ├── pack_mais_58_super_fluxos_templates_parte_01_03_a_12.md
@@ -305,7 +307,14 @@ A pasta `bonus/` contém dois packs extras com centenas de workflows prontos par
 
 ### Pack 1999 Templates
 
-Mais de 1999 templates organizados em 10 partes, cobrindo automações de:
+Mais de 1999 templates organizados em 10 partes, e cada parte dividida em blocos menores para abrir corretamente no GitHub.
+
+Formato atual:
+
+- `pack_1999_templates_parte_XX.md` = índice da parte
+- `pack_1999_templates_parte_XX_bloco_YY_NNNN_a_NNNN.md` = conteúdo detalhado com os templates
+
+Esses arquivos cobrem automações de:
 
 - WhatsApp, Telegram, Instagram, YouTube
 - Google Sheets, Gmail, Google Drive
@@ -326,6 +335,12 @@ Mais de 1999 templates organizados em 10 partes, cobrindo automações de:
 | [`pack_1999_templates_parte_08.md`](bonus/pack_1999_templates/pack_1999_templates_parte_08.md) | Parte 8 |
 | [`pack_1999_templates_parte_09.md`](bonus/pack_1999_templates/pack_1999_templates_parte_09.md) | Parte 9 |
 | [`pack_1999_templates_parte_10.md`](bonus/pack_1999_templates/pack_1999_templates_parte_10.md) | Parte 10 |
+
+**Como usar o Pack 1999:**
+1. Abra uma das partes (`pack_1999_templates_parte_XX.md`)
+2. Clique no bloco desejado (ex.: `bloco_01`, `bloco_02`...)
+3. Vá ao template pelo sumário do bloco
+4. Copie o bloco `json` e importe no n8n
 
 ### Pack 57 Super Fluxos
 
