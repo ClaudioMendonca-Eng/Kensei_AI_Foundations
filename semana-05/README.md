@@ -288,15 +288,13 @@ semana-05/
 ├── README.md                      ← Este arquivo
 └── bonus/
     ├── pack_1999_templates/       ← 1999 templates prontos para n8n
-  │   ├── pack_1999_templates_parte_01.md
-  │   ├── ...
-  │   ├── pack_1999_templates_parte_10.md
-    │   └── pack_1999_templates.md
+    │   ├── pack_1999_templates_parte_01.md
+    │   ├── ...
+    │   └── pack_1999_templates_parte_10.md
     └── pack_mais_58_super_fluxos_templates/   ← 57 super fluxos documentados
-    ├── pack_mais_58_super_fluxos_templates.md
-    ├── pack_mais_58_super_fluxos_templates_parte_01_03_a_12.md
-    ├── ...
-    └── pack_mais_58_super_fluxos_templates_parte_06_53_a_59.md
+        ├── pack_mais_58_super_fluxos_templates_parte_01_03_a_12.md
+        ├── ...
+        └── pack_mais_58_super_fluxos_templates_parte_06_53_a_59.md
 ```
 
 ---
@@ -318,7 +316,6 @@ Mais de 1999 templates organizados em 10 partes, cobrindo automações de:
 
 | Arquivo | Conteúdo |
 |---------|----------|
-| [`pack_1999_templates.md`](bonus/pack_1999_templates/pack_1999_templates.md) | Índice principal com links para todas as partes |
 | [`pack_1999_templates_parte_01.md`](bonus/pack_1999_templates/pack_1999_templates_parte_01.md) | Parte 1 |
 | [`pack_1999_templates_parte_02.md`](bonus/pack_1999_templates/pack_1999_templates_parte_02.md) | Parte 2 |
 | [`pack_1999_templates_parte_03.md`](bonus/pack_1999_templates/pack_1999_templates_parte_03.md) | Parte 3 |
@@ -335,10 +332,19 @@ Mais de 1999 templates organizados em 10 partes, cobrindo automações de:
 57 fluxos avançados documentados com diagrama visual (Mermaid) e JSON copiável diretamente para o n8n.
 
 **Como usar:**
-1. Abra [`pack_mais_58_super_fluxos_templates.md`](bonus/pack_mais_58_super_fluxos_templates/pack_mais_58_super_fluxos_templates.md)
-2. Clique na parte desejada no índice (Parte 1 a Parte 6)
+1. Abra uma das partes abaixo (Parte 1 a Parte 6)
+2. Encontre o fluxo desejado no sumário da parte
 3. Copie o bloco `json` da seção **Fluxo (.json)**
 4. No n8n: `+ New Workflow → ⋮ → Import from clipboard`
+
+| Arquivo | Conteúdo |
+|---------|----------|
+| [`pack_mais_58_super_fluxos_templates_parte_01_03_a_12.md`](bonus/pack_mais_58_super_fluxos_templates/pack_mais_58_super_fluxos_templates_parte_01_03_a_12.md) | Templates 3–12 |
+| [`pack_mais_58_super_fluxos_templates_parte_02_13_a_22.md`](bonus/pack_mais_58_super_fluxos_templates/pack_mais_58_super_fluxos_templates_parte_02_13_a_22.md) | Templates 13–22 |
+| [`pack_mais_58_super_fluxos_templates_parte_03_23_a_32.md`](bonus/pack_mais_58_super_fluxos_templates/pack_mais_58_super_fluxos_templates_parte_03_23_a_32.md) | Templates 23–32 |
+| [`pack_mais_58_super_fluxos_templates_parte_04_33_a_42.md`](bonus/pack_mais_58_super_fluxos_templates/pack_mais_58_super_fluxos_templates_parte_04_33_a_42.md) | Templates 33–42 |
+| [`pack_mais_58_super_fluxos_templates_parte_05_43_a_52.md`](bonus/pack_mais_58_super_fluxos_templates/pack_mais_58_super_fluxos_templates_parte_05_43_a_52.md) | Templates 43–52 |
+| [`pack_mais_58_super_fluxos_templates_parte_06_53_a_59.md`](bonus/pack_mais_58_super_fluxos_templates/pack_mais_58_super_fluxos_templates_parte_06_53_a_59.md) | Templates 53–59 |
 
 **Exemplos de fluxos incluídos:**
 
