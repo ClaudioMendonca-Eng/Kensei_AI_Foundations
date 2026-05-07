@@ -332,24 +332,41 @@ Pensamento AI-first                    Projeto capstone completo
 
 ### Semana 5 — Automação com n8n
 
+<p align="center">
+    <a href="/semana-05/README.md" target="_blank"><img style="margin: 10px" height="500" width="800" src="img/Kensei_AI_Foundations_S05_n8n.png" alt="Semana 5 - Automação com n8n"/></a>
+    <p align="center"><strong style="color: #ff3b30;">Aviso: clique na imagem para acessar o material completo da semana 5 - Automação com n8n</strong></p>
+</p>
+
+---
+
 **Pasta:** `semana-05/`
 
-- Automação visual no-code com **n8n** self-hosted via Docker.
-- 4 workflows completos exportados em JSON, prontos para importar.
+- Automação visual **no-code** com **n8n** self-hosted via Docker.
+- 4 workflows completos exportados em JSON, prontos para importar em qualquer instância n8n.
 - Integração com **OpenAI**, **Google Sheets**, **Telegram**, **RSS feeds** e **Email**.
+- Conceitos essenciais: **Triggers**, **Nodes**, **Connections**, **Logic IFs**.
 - API pessoal criada via Webhook — sem servidor, sem deploy.
+- Bônus: **1999+ templates prontos** em `semana-05/bonus/pack_1999_templates/` para alavancar sua imaginação.
 
 **Workflows:**
 
-| Arquivo | Fluxo | Integrações |
-|---------|-------|-------------|
-| `01_primeiro_workflow.json` | Manual Trigger → OpenAI → Google Sheets | OpenAI + Sheets |
-| `02_notificador_site.json` | Schedule (5min) → HTTP → IF → Telegram | Telegram |
-| `03_threat_intel_diario.json` | Schedule (8h) → RSS × 3 → Filter → OpenAI → Email | OpenAI + Email |
-| `04_api_sentimento.json` | Webhook POST → OpenAI → Respond JSON | OpenAI + Webhook |
+| Arquivo | Trigger | Fluxo | Integrações |
+|---------|---------|-------|-------------|
+| `01_primeiro_workflow.json` | Manual | Manual Trigger → OpenAI → Google Sheets | OpenAI + Google Sheets |
+| `02_notificador_site.json` | Schedule (5min) | HTTP Request → IF (status) → Telegram | Telegram |
+| `03_threat_intel_diario.json` | Schedule (8h) | RSS × 3 feeds → Filter → OpenAI → Email | RSS + OpenAI + Email |
+| `04_api_sentimento.json` | Webhook POST | Webhook → OpenAI → Respond JSON | OpenAI + Webhook |
 
-**Arquivo-chave:**
+**Conceitos-chave:**
+- **Workflow** — Sequência completa de ações automatizadas
+- **Node** — Cada caixinha do fluxo (OpenAI, Telegram, Sheets, etc.)
+- **Trigger** — O que dispara o workflow (manual, schedule, webhook, evento)
+- **Connection** — Linha que conecta nodes e passa dados
+
+**Arquivos-chave:**
 - [`semana-05/README.md`](semana-05/README.md)
+- [`semana-05/01_primeiro_workflow.json`](semana-05/01_primeiro_workflow.json)
+- [`semana-05/04_api_sentimento.json`](semana-05/04_api_sentimento.json)
 
 ---
 
