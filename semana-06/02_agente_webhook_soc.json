@@ -1,0 +1,128 @@
+{
+  "name": "02 - Agente Webhook SOC",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "soc-triagem",
+        "responseMode": "responseNode"
+      },
+      "id": "c1d2e3f4-0001-4000-8000-000000000001",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [240, 300],
+      "webhookId": "kensei-s06-soc-triagem"
+    },
+    {
+      "parameters": {
+        "resource": "chat",
+        "operation": "complete",
+        "model": "gpt-4o-mini",
+        "messages": {
+          "values": [
+            {
+              "role": "system",
+              "content": "Você é um agente SOC para triagem automática. Retorne APENAS JSON com: prioridade, tipo_evento, acao_recomendada, resumo."
+            },
+            {
+              "role": "user",
+              "content": "={{ `Recebi este evento via webhook:\\n${JSON.stringify($json, null, 2)}` }}"
+            }
+          ]
+        }
+      },
+      "id": "c1d2e3f4-0001-4000-8000-000000000002",
+      "name": "OpenAI - Classificar Evento",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [500, 300],
+      "credentials": {
+        "openAiApi": {
+          "id": "CONFIGURE_AQUI",
+          "name": "OpenAI API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const raw = $json.message?.content || '{}';\nlet parsed;\ntry {\n  parsed = JSON.parse(raw);\n} catch (e) {\n  parsed = {\n    prioridade: 'media',\n    tipo_evento: 'indefinido',\n    acao_recomendada: 'Validar payload e prompt',\n    resumo: raw\n  };\n}\n\nreturn [{\n  json: {\n    ok: true,\n    entrada: $json,\n    analise: parsed,\n    processado_em: new Date().toISOString(),\n    workflow: '02_agente_webhook_soc'\n  }\n}];"
+      },
+      "id": "c1d2e3f4-0001-4000-8000-000000000003",
+      "name": "Code - Montar Resposta",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [760, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $json }}",
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "id": "c1d2e3f4-0001-4000-8000-000000000004",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1020, 300]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "OpenAI - Classificar Evento",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI - Classificar Evento": {
+      "main": [
+        [
+          {
+            "node": "Code - Montar Resposta",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code - Montar Resposta": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "semana06-v1",
+  "meta": {
+    "templateCredsSetupCompleted": false,
+    "instanceId": "kensei-ai-foundations-semana06"
+  },
+  "id": "workflow-02-kensei-s06",
+  "tags": [
+    {
+      "name": "kensei-s06"
+    },
+    {
+      "name": "webhook"
+    },
+    {
+      "name": "soc"
+    }
+  ]
+}

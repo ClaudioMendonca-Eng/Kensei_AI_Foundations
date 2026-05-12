@@ -1,0 +1,150 @@
+{
+  "name": "03 - Agente de Threat Intel Diario",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 24
+            }
+          ]
+        }
+      },
+      "id": "d1e2f3a4-0001-4000-8000-000000000001",
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [220, 300]
+    },
+    {
+      "parameters": {
+        "url": "https://api.github.com/advisories?per_page=5",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Accept",
+              "value": "application/vnd.github+json"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "d1e2f3a4-0001-4000-8000-000000000002",
+      "name": "HTTP - GitHub Advisories",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [470, 300]
+    },
+    {
+      "parameters": {
+        "resource": "chat",
+        "operation": "complete",
+        "model": "gpt-4o-mini",
+        "messages": {
+          "values": [
+            {
+              "role": "system",
+              "content": "Você é um analista de threat intelligence. Gere um briefing em português para SOC com: resumo executivo, top riscos, recomendações acionáveis e IOCs citados."
+            },
+            {
+              "role": "user",
+              "content": "={{ `Analise estas advisories e gere briefing:\\n${JSON.stringify($json, null, 2)}` }}"
+            }
+          ]
+        }
+      },
+      "id": "d1e2f3a4-0001-4000-8000-000000000003",
+      "name": "OpenAI - Briefing",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [730, 300],
+      "credentials": {
+        "openAiApi": {
+          "id": "CONFIGURE_AQUI",
+          "name": "OpenAI API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "briefing",
+              "value": "={{ $json.message.content }}"
+            },
+            {
+              "name": "gerado_em",
+              "value": "={{ $now.toISO() }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "d1e2f3a4-0001-4000-8000-000000000004",
+      "name": "Set - Estruturar Briefing",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [990, 300]
+    }
+  ],
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "HTTP - GitHub Advisories",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP - GitHub Advisories": {
+      "main": [
+        [
+          {
+            "node": "OpenAI - Briefing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI - Briefing": {
+      "main": [
+        [
+          {
+            "node": "Set - Estruturar Briefing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "semana06-v1",
+  "meta": {
+    "templateCredsSetupCompleted": false,
+    "instanceId": "kensei-ai-foundations-semana06"
+  },
+  "id": "workflow-03-kensei-s06",
+  "tags": [
+    {
+      "name": "kensei-s06"
+    },
+    {
+      "name": "threat-intel"
+    },
+    {
+      "name": "agent"
+    }
+  ]
+}

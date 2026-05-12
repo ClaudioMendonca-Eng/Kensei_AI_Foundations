@@ -1,0 +1,218 @@
+{
+  "name": "01 - Agente de Triagem de Incidentes",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "b1c2d3e4-0001-4000-8000-000000000001",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [220, 300]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "titulo",
+              "value": "Múltiplas tentativas de login falho em VPN"
+            },
+            {
+              "name": "origem",
+              "value": "SIEM"
+            },
+            {
+              "name": "descricao",
+              "value": "Foram detectadas 218 tentativas de autenticação falha no intervalo de 5 minutos para 3 contas administrativas."
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "b1c2d3e4-0001-4000-8000-000000000002",
+      "name": "Set - Incidente",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [440, 300]
+    },
+    {
+      "parameters": {
+        "resource": "chat",
+        "operation": "complete",
+        "model": "gpt-4o-mini",
+        "messages": {
+          "values": [
+            {
+              "role": "system",
+              "content": "Você é um analista SOC N1. Classifique incidentes em baixa, media ou alta. Responda APENAS em JSON com as chaves: prioridade, tipo_incidente, acao_imediata, justificativa."
+            },
+            {
+              "role": "user",
+              "content": "={{ `Titulo: ${$json.titulo}\\nOrigem: ${$json.origem}\\nDescricao: ${$json.descricao}` }}"
+            }
+          ]
+        }
+      },
+      "id": "b1c2d3e4-0001-4000-8000-000000000003",
+      "name": "OpenAI - Triagem",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [670, 300],
+      "credentials": {
+        "openAiApi": {
+          "id": "CONFIGURE_AQUI",
+          "name": "OpenAI API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const raw = $json.message?.content || '{}';\nlet parsed;\ntry {\n  parsed = JSON.parse(raw);\n} catch (e) {\n  parsed = {\n    prioridade: 'media',\n    tipo_incidente: 'indefinido',\n    acao_imediata: 'Revisar manualmente a resposta do modelo',\n    justificativa: 'Falha ao interpretar JSON da IA'\n  };\n}\n\nreturn [{ json: { ...$json, ...parsed, processado_em: new Date().toISOString() } }];"
+      },
+      "id": "b1c2d3e4-0001-4000-8000-000000000004",
+      "name": "Code - Estruturar Saida",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [900, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ ($json.prioridade || '').toLowerCase() }}",
+              "operation": "equal",
+              "value2": "alta"
+            }
+          ]
+        }
+      },
+      "id": "b1c2d3e4-0001-4000-8000-000000000005",
+      "name": "IF - Prioridade Alta?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [1130, 300]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "status",
+              "value": "ESCALONAR_IMEDIATO"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "b1c2d3e4-0001-4000-8000-000000000006",
+      "name": "Set - Escalar",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [1360, 220]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "status",
+              "value": "MONITORAR_E_DOCUMENTAR"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "b1c2d3e4-0001-4000-8000-000000000007",
+      "name": "Set - Monitorar",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [1360, 380]
+    }
+  ],
+  "connections": {
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "Set - Incidente",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set - Incidente": {
+      "main": [
+        [
+          {
+            "node": "OpenAI - Triagem",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI - Triagem": {
+      "main": [
+        [
+          {
+            "node": "Code - Estruturar Saida",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code - Estruturar Saida": {
+      "main": [
+        [
+          {
+            "node": "IF - Prioridade Alta?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF - Prioridade Alta?": {
+      "main": [
+        [
+          {
+            "node": "Set - Escalar",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Set - Monitorar",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "semana06-v1",
+  "meta": {
+    "templateCredsSetupCompleted": false,
+    "instanceId": "kensei-ai-foundations-semana06"
+  },
+  "id": "workflow-01-kensei-s06",
+  "tags": [
+    {
+      "name": "kensei-s06"
+    },
+    {
+      "name": "agent"
+    },
+    {
+      "name": "soc"
+    }
+  ]
+}

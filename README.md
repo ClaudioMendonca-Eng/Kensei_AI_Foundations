@@ -216,7 +216,7 @@ Pensamento AI-first                    Projeto capstone completo
 | S3 | Dados com Pandas + visualização | ✅ Concluída |
 | S4 | APIs de IA + assistente de terminal | ✅ Concluída |
 | S5 | Automação no-code com n8n | ✅ Concluída |
-| S6 | n8n + IA (agentes inteligentes) | 🔜 Em breve |
+| S6 | n8n + IA (agentes inteligentes) | ✅ Concluída |
 | S7 | Apps web com Streamlit + deploy | 🔜 Em breve |
 | S8 | Projeto final + apresentação | 🔜 Em breve |
 
@@ -367,6 +367,46 @@ Pensamento AI-first                    Projeto capstone completo
 - [`semana-05/README.md`](semana-05/README.md)
 - [`semana-05/01_primeiro_workflow.json`](semana-05/01_primeiro_workflow.json)
 - [`semana-05/04_api_sentimento.json`](semana-05/04_api_sentimento.json)
+
+---
+
+### Semana 6 — n8n + IA (Agentes Inteligentes)
+
+<p align="center">
+    <a href="/semana-06/README.md" target="_blank"><img style="margin: 10px" height="500" width="800" src="img/Kensei_AI_Foundations_S06_agentes.png" alt="Semana 6 - n8n + IA (Agentes Inteligentes)"/></a>
+    <p align="center"><strong style="color: #ff3b30;">Aviso: clique na imagem para acessar o material completo da semana 6 - n8n + IA (Agentes Inteligentes)</strong></p>
+</p>
+
+---
+
+**Pasta:** `semana-06/`
+
+- Construção de **agentes inteligentes no n8n** para cenários reais de SOC.
+- Arquitetura **single-agent e multi-agent** com respostas estruturadas em JSON.
+- 5 workflows completos exportados em JSON e prontos para importar.
+- 3 endpoints webhook para integração com SIEM/SOAR.
+- Fluxos com fallback, parse seguro de JSON e roteamento por prioridade/escalonamento.
+
+**Workflows:**
+
+| Arquivo | Trigger | Fluxo | Objetivo |
+|---------|---------|-------|----------|
+| `01_agente_triagem_incidentes.json` | Manual | Manual Trigger → OpenAI → IF | Triagem de incidentes com decisão de escalonamento |
+| `02_agente_webhook_soc.json` | Webhook POST | Webhook → OpenAI → Respond JSON | API de triagem SOC para sistemas externos |
+| `03_agente_threat_intel.json` | Schedule (24h) | HTTP Advisories → OpenAI → Set | Briefing diário de threat intel |
+| `04_orquestrador_multiagente_soc.json` | Webhook POST | Analista (IA) → Resposta (IA) → Consolidar | Orquestração multiagente para incidentes complexos |
+| `05_agente_antiphishing.json` | Webhook POST | OpenAI → IF Escalonar → Respond | Triagem anti-phishing com playbook de ação |
+
+**Conceitos-chave:**
+- **Agentic workflow** — Fluxo com tomada de decisão baseada em contexto.
+- **Role separation** — Um agente para diagnóstico e outro para resposta.
+- **Structured output** — Saída JSON validável para automação posterior.
+- **Escalonamento automático** — Regras para N1/N2 com base em risco/prioridade.
+
+**Arquivos-chave:**
+- [`semana-06/README.md`](semana-06/README.md)
+- [`semana-06/04_orquestrador_multiagente_soc.json`](semana-06/04_orquestrador_multiagente_soc.json)
+- [`semana-06/05_agente_antiphishing.json`](semana-06/05_agente_antiphishing.json)
 
 ---
 
