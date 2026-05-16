@@ -15,13 +15,14 @@
 
 > Transformando scripts Python em apps web reais com IA e integracao.
 
-Nesta semana o foco e construir os 5 projetos oficiais da aula:
+Nesta semana o foco e construir os projetos oficiais da aula:
 
 - projeto 1: calculadora IMC
 - projeto 2: dashboard de cyber attacks
 - projeto 3: chatbot web com IA
 - projeto 4: analisador de PDF com IA
 - projeto 5: Streamlit + agente n8n
+- projeto 6: Grey Hack - simulação de hacking estilo CTF
 
 ---
 
@@ -34,6 +35,7 @@ Nesta semana o foco e construir os 5 projetos oficiais da aula:
 | `03_chatbot_web_ia.py` | Chatbot web moderno com historico de conversas e Gemini |
 | `04_analisador_pdf_ia.py` | Upload de PDF + extracao de texto + resumo com IA |
 | `05_soc_streamlit_n8n.py` | Interface Streamlit para chamar webhook n8n |
+| `06_gamer_hack.py` | Jogo de hacking estilo Grey Hack com terminal interativo e missões CTF |
 | `requirements.txt` | Dependencias do projeto |
 | `.streamlit/config.toml` | Configuracao visual e de servidor do Streamlit |
 
@@ -126,36 +128,122 @@ streamlit run 04_analisador_pdf_ia.py
 
 ---
 
-## Projeto 5 - Streamlit + Agente n8n (Integracao)
+## Projeto 5 - Streamlit + n8n + Gemini Modernizado
 
-Arquivo: `05_soc_streamlit_n8n.py`
-Workflow n8n (importavel): `05_agente_n8n_soc_webhook.json`
+Arquivo: `05_soc_streamlit_n8n.py`  
+Workflow n8n (importável): `05_agente_n8n_soc_webhook.json`
 
-Conceitos:
-- formulario Streamlit para evento SOC
-- chamada HTTP para webhook n8n com `requests`
-- visualizacao da resposta JSON do agente
+### 🛠️ Conceitos e Funcionalidades
+- **Interface Dark Theme**: UI moderna com CSS personalizado para uma experiência SOC profissional.
+- **Alert Icons**: Feedback visual imediato usando ícones de status (🔴 Crítico, 🟡 Atenção, 🟢 Normal).
+- **Performance Testing**: Monitoramento do tempo de resposta da integração entre Streamlit e n8n.
+- **Integração Gemini**: O agente n8n utiliza o Google Gemini para análise inteligente de incidentes.
 
-Importar no n8n:
-1. Abra o n8n e clique em `Import from File`
-2. Selecione `05_agente_n8n_soc_webhook.json`
-3. Ative o workflow
-4. Copie a URL de producao do webhook (formato `.../webhook/soc-triagem`)
-5. Configure em `N8N_SOC_WEBHOOK_URL` no `.env`
+### 📥 Como Importar no n8n
+1. No n8n, clique em **Add Workflow** -> **Import from File**.
+2. Selecione o arquivo `05_agente_n8n_soc_webhook.json`.
+3. Configure suas credenciais do Google Gemini no nó correspondente.
+4. Clique em **Execute Workflow** (para testes) ou **Activate** (para produção).
+5. Copie a **Webhook URL** gerada.
 
-Importante:
-- Link do editor (`.../workflow/new?...`) NAO executa automacao.
-- O Streamlit precisa da URL do webhook (`/webhook/...` ou `/webhook-test/...`).
+### ⚙️ Configuração do `.env`
+Crie ou edite o arquivo `.env` na raiz da pasta `semana-07`:
+```env
+N8N_SOC_WEBHOOK_URL=https://seu-n8n.instancia.com/webhook/id-do-seu-webhook
+GOOGLE_API_KEY=sua_chave_aqui
+```
+
+### 📋 Exemplos de Payload e Response
+
+**Payload enviado pelo Streamlit:**
+```json
+{
+  "event_type": "Brute Force Attack",
+  "severity": "High",
+  "source_ip": "192.168.1.100",
+  "description": "Multiple failed login attempts detected in 5 minutes."
+}
+```
+
+**Response recebido do n8n (Gerado pelo Gemini):**
+```json
+{
+  "status": "Analysed",
+  "risk_score": 85,
+  "recommendation": "🔴 Immediate Action: Block source IP and trigger password reset for affected user.",
+  "analysis": "The incident pattern matches a classic brute force attempt. Gemini suggests increasing MFA enforcement."
+}
+```
+
+### 🚀 Rodar o Projeto
+```bash
+streamlit run 05_soc_streamlit_n8n.py
+```
+
+<p align="center">
+    <img src="../img/Kensei_AI_Foundations_S07_Streamlit-05_soc_streamlit_n8n01.png" alt="Semana 7 - Streamlit na pratica" width="1100">
+</p>
+
+---
+
+## Projeto 6 - Grey Hack (Simulação CTF)
+
+Arquivo: `06_gamer_hack.py`
+
+### 🎮 Sobre o Jogo
+
+Simulação educacional de hacking estilo **Grey Hack** com terminal interativo, missões progressivas e sistema de recompensas. Todos os hosts, IPs e vulnerabilidades são **completamente fictícios**.
+
+### 🖥️ Funcionalidades
+
+- **Terminal interativo** com ~15 comandos reais: `nmap`, `exploit`, `crack`, `dump`, `pivot`, `ls`, `download`, `buy`
+- **12 hosts fictícios** distribuídos em 3 subredes (192.168.1.x, 192.168.2.x, 10.0.0.x)
+- **5 missões** com dificuldade progressiva (★☆☆☆☆ até ★★★★★)
+- **Sistema de XP e Level Up** com barra de progresso
+- **Mercado negro** com 8 ferramentas compráveis (nmap e hydra gratuitos)
+- **Network Map** visual com status de cada host
+- **Atalhos rápidos** para os comandos mais comuns
+
+### 📋 Missões
+
+| Missão | Dificuldade | Objetivo | Recompensa |
+|--------|-------------|----------|------------|
+| FIRST CONTACT    | ★☆☆☆☆ | Escanear 5 hosts na rede | 200¢ |
+| DATA BREACH      | ★★☆☆☆ | Comprometer servidor MySQL | 800¢ |
+| GHOST PROTOCOL   | ★★★☆☆ | Infiltrar servidor de e-mail | 1.500¢ |
+| ZERO DAY         | ★★★★☆ | Dominar o Domain Controller | 3.000¢ |
+| KING OF THE HILL | ★★★★★ | Controlar o firewall | 10.000¢ |
+
+### 🗺️ Topologia da Rede (Fictícia)
+
+```
+FIREWALL (10.0.0.5)
+    ├── SIEM (10.0.0.15)
+    ├── DMZ 192.168.1.x
+    │       ├── gateway-01 (.10), web-srv-prod (.20), db-mysql-01 (.30)
+    │       ├── mail-srv (.40), hr-workstation (.50), file-srv-01 (.60)
+    │       └── dev-jenkins (.70), vpn-concentrator (.80)
+    └── CORP 192.168.2.x
+            └── dc-ad-01 (.10), backup-srv (.20)
+```
+
+### 🔧 Abas da Interface
+
+1. **🖥️ Terminal** — CLI com input livre e atalhos rápidos
+2. **🗺️ Network** — mapa visual com status dos hosts e ações rápidas
+3. **📋 Missions** — quadro de missões com hints desbloqueáveis
+4. **🔧 Toolkit** — arsenal + compra de ferramentas
+5. **📄 Briefing** — topologia e referência completa de comandos
 
 Rodar:
 
 ```bash
-streamlit run 05_soc_streamlit_n8n.py
+streamlit run 06_gamer_hack.py
 ```
 <p align="center">
-    <img src="../img/Kensei_AI_Foundations_S07_Streamlit-05_soc_streamlit_n8n01.png" alt="Semana 7 - Streamlit na pratica" width="1100">
-    <img src="../img/Kensei_AI_Foundations_S07_Streamlit-05_soc_streamlit_n8n02.png" alt="Semana 7 - Streamlit na pratica" width="1100">
-    <img src="../img/Kensei_AI_Foundations_S07_Streamlit-05_soc_streamlit_n8n03.png" alt="Semana 7 - Streamlit na pratica" width="1100">
+    <img src="../img/Kensei_AI_Foundations_S07_Streamlit-06_gamer_hack01.png" alt="Semana 7 - Streamlit na pratica" width="1100">
+    <img src="../img/Kensei_AI_Foundations_S07_Streamlit-06_gamer_hack02.png" alt="Semana 7 - Streamlit na pratica" width="1100" >
+    <img src="../img/Kensei_AI_Foundations_S07_Streamlit-06_gamer_hack03.png" alt="Semana 7 - Streamlit na pratica" width="1100">
 </p>
 ---
 
@@ -189,6 +277,8 @@ Dica:
 
 Ao final da semana 07, voce tera:
 
-- 5 apps oficiais da aula implementados
-- dashboard real de cyber attacks
-- exemplos de IA aplicados a chat, PDF e automacao com n8n
+- 6 apps implementados (5 oficiais + 1 bônus)
+- dashboard real de cyber attacks com Plotly
+- chatbot e analisador de PDF integrados ao Google Gemini
+- agente n8n com webhook + Gemini gerando playbooks SOC
+- jogo de hacking estilo Grey Hack com terminal CTF interativo

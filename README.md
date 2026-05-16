@@ -412,36 +412,51 @@ Pensamento AI-first                    Projeto capstone completo
 
 ### Semana 7 — Apps web com Streamlit + deploy
 
+<p align="center">
+    <a href="/semana-07/README.md" target="_blank"><img style="margin: 10px" height="500" width="800" src="img/Kensei_AI_Foundations_S07_streamlit.png" alt="Semana 7 - Apps com Streamlit"/></a>
+    <p align="center"><strong style="color: #ff3b30;">Aviso: clique na imagem para acessar o material completo da semana 7 - Streamlit na prática</strong></p>
+</p>
+
+---
+
 **Pasta:** `semana-07/`
 
 - Construção dos 5 projetos oficiais da aula de Streamlit.
-- Dashboard de Cyber Attacks com dados reais (`Global_Cybersecurity_Threats_2015-2024.csv`), tema dark e mapa mundial interativo.
-- Chatbot web moderno com Google Gemini, histórico de conversas, sugestões rápidas e tratamento de limites/quota.
-- Analisador de PDF com IA e integração com agente n8n via webhook.
-- Foco em transformar scripts em apps web prontos para demonstração e deploy.
+- Dashboard de Cyber Attacks com dados reais, **tema dark moderno**, **mapa mundial interativo com click-to-details**, sidebar com filtros avançados e 5+ abas temáticas.
+- Chatbot web moderno com **Google Gemini 2.5-flash**, histórico de conversas persistente, sugestões rápidas clicáveis, auto-continuação de respostas longas e tratamento robusto de quota.
+- Analisador de PDF com IA: upload, extração de até 10 páginas e resumo estruturado com Gemini.
+- **Projeto 5 Modernizado**: Integração SOC com n8n + Gemini:  
+  - **Workflow n8n** com pipeline completo: Webhook → Classificação → **Gemini IA para playbook** → Consolidação → Response JSON
+  - **Streamlit P5** com UI SOC profissional: dark theme, **alert icons por prioridade** (🔴 alta, 🟡 média, 🟢 baixa), **teste de performance** com 5 requisições, métricas de latência e taxa de sucesso.
+- Foco em transformar scripts em apps web prontos para demonstração, deploy e operação em produção.
 
 **Apps e arquivos:**
 
-| Arquivo | Objetivo |
-|---------|----------|
-| `01_calculadora_imc.py` | Calculadora IMC com classificação automática |
-| `02_dashboard_cyber_attacks.py` | Dashboard de ataques cibernéticos com dark mode, mapa mundial interativo, filtros e KPIs |
-| `03_chatbot_web_ia.py` | Chatbot web moderno com histórico de conversas e Google Gemini |
-| `04_analisador_pdf_ia.py` | Upload de PDF, extração de texto e resumo com IA (Gemini) |
-| `05_soc_streamlit_n8n.py` | Front-end Streamlit para chamar agente n8n |
-| `requirements.txt` | Dependências para execução e deploy |
+| Arquivo | Objetivo | Destaques |
+|---------|----------|----------|
+| `01_calculadora_imc.py` | Calculadora IMC com classificação automática | Validação básica |
+| `02_dashboard_cyber_attacks.py` | Dashboard de ataques cibernéticos | Dark mode, mapa interativo, 5 abas, KPIs, filtros |
+| `03_chatbot_web_ia.py` | Chatbot web com Google Gemini | Histórico, sugestões, auto-continuação, quota handling |
+| `04_analisador_pdf_ia.py` | Upload de PDF + resumo com IA | Extração até 10 páginas, prompt estruturado SOC |
+| `05_soc_streamlit_n8n.py` | Front-end SOC + webhook n8n | UI moderna, icons de prioridade, teste de performance |
+| `05_agente_n8n_soc_webhook.json` | Workflow n8n importável | Webhook → Classificação → Gemini → Consolidação |
+| `requirements.txt` | Dependências | streamlit, pandas, plotly, google-generativeai, pypdf, requests |
 
 **Conceitos-chave:**
-- **Streamlit** para interface web rápida em Python.
-- **Cache de dados** com `@st.cache_data`.
-- **UX moderna** com navegação por conversas e sugestões clicáveis no chat.
-- **IA aplicada** com Google Gemini em chat e análise documental.
-- **Integração de automação** com webhook n8n para operações SOC.
+- **Streamlit** para interface web rápida em Python, com cache e session state.
+- **Plotly** para gráficos interativos (choropleth, heatmap, treemap, scatter).
+- **UX moderna** com tema dark, navegação por abas e conversas, sugestões clicáveis.
+- **IA aplicada** com Google Gemini em chat, análise documental e geração de playbooks.
+- **n8n + IA** com HTTP Request para Gemini API, consolidação de respostas estruturadas.
+- **Performance monitoring** com métricas de latência, taxa de sucesso e teste de carga.
+- **Integração produção** com webhook para operações SOC em tempo real.
 
 **Arquivos-chave:**
 - [`semana-07/README.md`](semana-07/README.md)
-- [`semana-07/02_dashboard_cyber_attacks.py`](semana-07/02_dashboard_cyber_attacks.py)
-- [`semana-07/05_soc_streamlit_n8n.py`](semana-07/05_soc_streamlit_n8n.py)
+- [`semana-07/02_dashboard_cyber_attacks.py`](semana-07/02_dashboard_cyber_attacks.py) (dashboard avançado)
+- [`semana-07/03_chatbot_web_ia.py`](semana-07/03_chatbot_web_ia.py) (chat com Gemini)
+- [`semana-07/05_soc_streamlit_n8n.py`](semana-07/05_soc_streamlit_n8n.py) (SOC UI moderna)
+- [`semana-07/05_agente_n8n_soc_webhook.json`](semana-07/05_agente_n8n_soc_webhook.json) (workflow Gemini)
 
 ---
 
