@@ -157,7 +157,7 @@
     },
     {
       "parameters": {
-        "chatId": "={{ String($env.TELEGRAM_CHANNEL_ID || 'SEU_CHAT_ID_TELEGRAM_AQUI').replace(/[\"']/g, '').trim() }}",
+        "chatId": "={{ $env.TELEGRAM_CHANNEL_ID || 'SEU_CHAT_ID_TELEGRAM_AQUI' }}",
         "text": "={{ $json.telegram_text }}",
         "additionalFields": {
           "parse_mode": "Markdown"
