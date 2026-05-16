@@ -342,7 +342,7 @@ Pensamento AI-first                    Projeto capstone completo
 **Pasta:** `semana-05/`
 
 - Automação visual **no-code** com **n8n** self-hosted via Docker.
-- 4 workflows completos exportados em JSON, prontos para importar em qualquer instância n8n.
+- 5 workflows completos exportados em JSON, prontos para importar em qualquer instância n8n.
 - Integração com **OpenAI**, **Google Sheets**, **Telegram**, **RSS feeds** e **Email**.
 - Conceitos essenciais: **Triggers**, **Nodes**, **Connections**, **Logic IFs**.
 - API pessoal criada via Webhook — sem servidor, sem deploy.
@@ -356,6 +356,7 @@ Pensamento AI-first                    Projeto capstone completo
 | `02_notificador_site.json` | Schedule (5min) | HTTP Request → IF (status) → Telegram | Telegram |
 | `03_threat_intel_diario.json` | Schedule (8h) | RSS × 3 feeds → Filter → OpenAI → Email | RSS + OpenAI + Email |
 | `04_api_sentimento.json` | Webhook POST | Webhook → OpenAI → Respond JSON | OpenAI + Webhook |
+| `05_telegram_mensagem_diaria.json` | Schedule (8h) | RSS × 3 feeds → Filter → Gemini → Aggregate → Telegram | RSS + Gemini + Telegram |
 
 **Conceitos-chave:**
 - **Workflow** — Sequência completa de ações automatizadas

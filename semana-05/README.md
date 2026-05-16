@@ -103,7 +103,7 @@ Depois acesse: **http://localhost:5678**
 
 ---
 
-## Os 4 Workflows desta Semana
+## Os 5 Workflows desta Semana
 
 ### Workflow 01 — Frase Motivacional → Google Sheets
 
@@ -224,6 +224,74 @@ Invoke-RestMethod -Method POST `
 
 ---
 
+### Workflow 05 — Telegram Mensagem Diaria (RSS + Gemini)
+
+**Arquivo:** [05_telegram_mensagem_diaria.json](05_telegram_mensagem_diaria.json)
+
+**Fluxo:** `Schedule (8h) → 3x RSS Feeds → Merge → Filter 24h → Gemini → Aggregate → Telegram`
+
+```mermaid
+flowchart LR
+   A[Schedule 8h] --> B[RSS The Hacker News]
+   A --> C[RSS BleepingComputer]
+   A --> D[RSS KrebsOnSecurity]
+   B --> E[Merge - Unir Feeds]
+   C --> E
+   D --> E
+   E --> F[Filter - Ultimas 24h]
+   F --> G[Gemini - Resumir e Classificar]
+   G --> H[Code - Extrair Resumo Gemini]
+   H --> I[Aggregate - Juntar Resumos]
+   I --> J[Code - Montar Mensagem Telegram]
+   J --> K[Telegram - Enviar no Canal]
+```
+
+| Node | Tipo | O que faz |
+|------|------|-----------|
+| Schedule | Trigger | Dispara diariamente as 8:00 |
+| RSS (x3) | Action | Le The Hacker News, BleepingComputer e KrebsOnSecurity |
+| Merge | Transform | Junta os itens dos 3 feeds |
+| Filter | Logic | Mantem apenas noticias das ultimas 24h |
+| Gemini | Action | Resume e classifica criticidade (🔴🟡🟢) |
+| Aggregate | Transform | Une todos os resumos em um unico item |
+| Telegram | Action | Envia o digest no canal configurado |
+
+#### Como colocar para funcionar (passo a passo)
+
+1. Importe [05_telegram_mensagem_diaria.json](05_telegram_mensagem_diaria.json) no n8n.
+2. Configure credencial `Telegram Bot API` no node `Telegram - Enviar no Canal`.
+3. Garanta que a variavel `GOOGLE_API_KEY` esteja disponivel no ambiente do n8n.
+4. Configure o canal no Telegram:
+  - Crie um bot com `@BotFather`.
+  - Adicione o bot no canal/grupo.
+  - Promova como admin para permitir envio de mensagens.
+5. Defina o destino do canal:
+  - Opção A: preencher `TELEGRAM_CHANNEL_ID` no ambiente do n8n.
+  - Opção B: substituir `SEU_CHAT_ID_TELEGRAM_AQUI` direto no node Telegram.
+6. Execute manualmente uma vez para validar.
+7. Ative o workflow para rodar automaticamente todos os dias as 8:00.
+
+#### Exemplo de ambiente (Docker)
+
+```bash
+docker run -it --rm \
+  -p 5678:5678 \
+  -e GOOGLE_API_KEY="SUA_CHAVE_GEMINI" \
+  -e TELEGRAM_CHANNEL_ID="SEU_CHAT_ID_OU_ID_DO_CANAL" \
+  -v n8n_data:/home/node/.n8n \
+  n8nio/n8n
+```
+
+> Dica: em canais, o ID normalmente comeca com `-100...`.
+
+#### Observacoes importantes
+
+- O workflow usa `gemini-2.5-flash` via HTTP Request (sem node OpenAI).
+- A mensagem final e truncada para evitar limite de tamanho do Telegram.
+- Se nao houver noticias nas ultimas 24h, o bot envia mensagem informando ausencia de itens.
+
+---
+
 ## Como Importar Workflows no n8n
 
 ### Método 1: Interface Web
@@ -251,6 +319,11 @@ Invoke-RestMethod -Method POST `
 2. Crie uma API key
 3. No n8n: `Settings → Credentials → + Add credential → OpenAI`
 4. Cole a API key
+
+### Google Gemini (variavel de ambiente)
+1. Gere sua chave no Google AI Studio.
+2. Suba o n8n com `GOOGLE_API_KEY` no ambiente.
+3. Os nodes HTTP de Gemini usam essa variavel automaticamente.
 
 ### Google Sheets (OAuth2)
 1. No n8n: `Settings → Credentials → + Add credential → Google Sheets OAuth2`
@@ -285,6 +358,7 @@ semana-05/
 ├── 02_notificador_site.json       ← Monitor de site down com Telegram
 ├── 03_threat_intel_diario.json    ← RSS feeds → IA → Email digest
 ├── 04_api_sentimento.json         ← Webhook API → OpenAI → JSON
+├── 05_telegram_mensagem_diaria.json ← RSS feeds → Gemini → Telegram
 ├── README.md                      ← Este arquivo
 └── bonus/
     ├── pack_1999_templates/       ← 1999 templates prontos para n8n
@@ -380,7 +454,7 @@ Esses arquivos cobrem automações de:
 
 ## Para Casa
 
-- [x] Importar e configurar os 4 workflows
+- [x] Importar e configurar os 5 workflows
 - [ ] Criar **UM workflow seu** (resolve um problema real do seu dia a dia)
 - [ ] Testar e deixar rodando 1 semana
 - [ ] Adicionar prints de cada fluxo funcionando a este README
