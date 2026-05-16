@@ -382,31 +382,30 @@ Pensamento AI-first                    Projeto capstone completo
 **Pasta:** `semana-06/`
 
 - Construção de **agentes inteligentes no n8n** para cenários reais de SOC.
-- Arquitetura **single-agent e multi-agent** com respostas estruturadas em JSON.
-- 5 workflows completos exportados em JSON e prontos para importar.
-- 3 endpoints webhook para integração com SIEM/SOAR.
-- Fluxos com fallback, parse seguro de JSON e roteamento por prioridade/escalonamento.
+- Fluxos alinhados ao conteúdo da aula com foco em **LLM + tools + contexto + resposta estruturada**.
+- 4 workflows principais exportados em JSON e prontos para importar.
+- Integração principal com **Google Gemini** via variável de ambiente `GOOGLE_API_KEY`.
+- Pasta `bonus/` com os workflows anteriores preservados para estudo e comparação.
 
 **Workflows:**
 
 | Arquivo | Trigger | Fluxo | Objetivo |
 |---------|---------|-------|----------|
-| `01_agente_triagem_incidentes.json` | Manual | Manual Trigger → OpenAI → IF | Triagem de incidentes com decisão de escalonamento |
-| `02_agente_webhook_soc.json` | Webhook POST | Webhook → OpenAI → Respond JSON | API de triagem SOC para sistemas externos |
-| `03_agente_threat_intel.json` | Schedule (24h) | HTTP Advisories → OpenAI → Set | Briefing diário de threat intel |
-| `04_orquestrador_multiagente_soc.json` | Webhook POST | Analista (IA) → Resposta (IA) → Consolidar | Orquestração multiagente para incidentes complexos |
-| `05_agente_antiphishing.json` | Webhook POST | OpenAI → IF Escalonar → Respond | Triagem anti-phishing com playbook de ação |
+| `01_agente_basico.json` | Manual | Manual Trigger → Set Pergunta → Calculator/Wikipedia → Gemini | Agente básico com tools e síntese final |
+| `02_agente_pesquisador_web.json` | Manual | Set Tema → SerpAPI → Wikipedia → IA | Pesquisa web e consolidação de contexto SOC |
+| `03_converse_com_seus_dados_csv.json` | Manual | Set Pergunta/Caminho → Contexto → IA | Template de conversa com dados CSV |
+| `04_soc_triagem_agent.json` | Webhook POST | Webhook → VirusTotal + URLScan → Merge → IA → Response | Triagem SOC de IOC para integração com sistemas externos |
 
 **Conceitos-chave:**
 - **Agentic workflow** — Fluxo com tomada de decisão baseada em contexto.
-- **Role separation** — Um agente para diagnóstico e outro para resposta.
+- **Tools externas** — Uso de HTTP Request para enriquecer contexto (Wikipedia, SerpAPI, VirusTotal, URLScan).
 - **Structured output** — Saída JSON validável para automação posterior.
-- **Escalonamento automático** — Regras para N1/N2 com base em risco/prioridade.
+- **Integração com Gemini** — Geração de resposta via API para síntese e triagem.
 
 **Arquivos-chave:**
 - [`semana-06/README.md`](semana-06/README.md)
-- [`semana-06/04_orquestrador_multiagente_soc.json`](semana-06/04_orquestrador_multiagente_soc.json)
-- [`semana-06/05_agente_antiphishing.json`](semana-06/05_agente_antiphishing.json)
+- [`semana-06/01_agente_basico.json`](semana-06/01_agente_basico.json)
+- [`semana-06/04_soc_triagem_agent.json`](semana-06/04_soc_triagem_agent.json)
 
 ---
 
