@@ -1,0 +1,163 @@
+{
+  "name": "05 - Agente n8n SOC para Streamlit (com Gemini)",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "soc-triagem",
+        "responseMode": "responseNode",
+        "options": {
+          "allowedOrigins": "*"
+        }
+      },
+      "id": "s7-wf05-0001",
+      "name": "Webhook - Receber Evento",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [260, 300],
+      "webhookId": "kensei-s07-soc-triagem"
+    },
+    {
+      "parameters": {
+        "jsCode": "const body = $json.body || {};\n\nconst evento = String(body.evento || 'indefinido');\nconst tentativas = Number(body.tentativas || 0);\nconst janela = Number(body.janela_minutos || 0);\n\nlet prioridade = 'baixa';\nlet acao = 'Monitorar e registrar evento.';\n\nif (tentativas >= 200 || /ransomware|exfiltracao|credential_stuffing/i.test(evento)) {\n  prioridade = 'alta';\n  acao = 'Escalonar imediatamente para N2 e bloquear origem de ataque.';\n} else if (tentativas >= 50 || /phishing|bruteforce|anomalia/i.test(evento)) {\n  prioridade = 'media';\n  acao = 'Abrir ticket, aplicar contenção inicial e acompanhar.';\n}\n\nreturn [{\n  json: {\n    ok: true,\n    workflow: '05_agente_n8n_soc_webhook',\n    entrada: body,\n    analise: {\n      prioridade,\n      acao_recomendada: acao,\n      score_risco: Math.min(100, Math.round((tentativas * 0.3) + (janela * 0.8))),\n      resumo: `Evento ${evento} em ${body.host || 'host_desconhecido'} para ${body.usuario_alvo || 'usuario_desconhecido'}.`\n    },\n    processado_em: new Date().toISOString()\n  }\n}];"
+      },
+      "id": "s7-wf05-0002",
+      "name": "Code - Classificar Risco",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [560, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $json }}",
+        "options": {
+          "responseCode": 200,
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          }
+        }
+      },
+      "id": "s7-wf05-0003",
+      "name": "Respond - Retornar JSON",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [860, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "key",
+              "value": "={{ $env.GOOGLE_API_KEY || '' }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ {\n  contents: [\n    {\n      role: 'user',\n      parts: [\n        {\n          text: `Você é um analista SOC experiente. Analise o evento e monte um playbook estruturado.\nRetorne APENAS JSON válido com: playbook_id, passos_imediatos (array), monitoramento (array), escalacao (string), tempo_estimado_minutos.\n\nEvento: ${$('Code - Classificar Risco').first().json.entrada.evento}\nHost: ${$('Code - Classificar Risco').first().json.entrada.host}\nTentativas: ${$('Code - Classificar Risco').first().json.entrada.tentativas}\nPrioridade: ${$('Code - Classificar Risco').first().json.analise.prioridade}`\n        }\n      ]\n    }\n  ],\n  generationConfig: {\n    temperature: 0.3\n  }\n} }}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "s7-wf05-0002b",
+      "name": "Gemini - Playbook Resposta",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1050, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "const risco = $('Code - Classificar Risco').first().json;\n\nlet playbook = {};\nconst raw = $('Gemini - Playbook Resposta').first()?.json?.candidates?.[0]?.content?.parts?.[0]?.text || '';\n\nif (raw) {\n  try {\n    const limpo = raw.replace(/```json\\n?/g, '').replace(/```\\n?/g, '').trim();\n    playbook = JSON.parse(limpo);\n  } catch (e) {\n    playbook = { erro: 'Parse gemini', detalhes: raw };\n  }\n} else {\n  playbook = { erro: 'Sem resposta Gemini', detalhes: $('Gemini - Playbook Resposta').first()?.json || {} };\n}\n\nreturn [{\n  json: {\n    ok: true,\n    entrada: risco.entrada,\n    classificacao: risco.analise,\n    playbook: playbook,\n    processado_em: new Date().toISOString(),\n    workflow: '05_agente_n8n_soc_webhook_v2_gemini'\n  }\n}];"
+      },
+      "id": "s7-wf05-0002c",
+      "name": "Code - Consolidar Resposta",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1280, 300]
+    }
+  ],
+  "connections": {
+    "Webhook - Receber Evento": {
+      "main": [
+        [
+          {
+            "node": "Code - Classificar Risco",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code - Classificar Risco": {
+      "main": [
+        [
+          {
+            "node": "Gemini - Playbook Resposta",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gemini - Playbook Resposta": {
+      "main": [
+        [
+          {
+            "node": "Code - Consolidar Resposta",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code - Consolidar Resposta": {
+      "main": [
+        [
+          {
+            "node": "Respond - Retornar JSON",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "semana07-v2-gemini",
+  "meta": {
+    "templateCredsSetupCompleted": false,
+    "instanceId": "kensei-ai-foundations-semana07"
+  },
+  "id": "workflow-05-kensei-s07",
+  "tags": [
+    {
+      "name": "kensei-s07"
+    },
+    {
+      "name": "webhook"
+    },
+    {
+      "name": "soc"
+    },
+    {
+      "name": "gemini"
+    }
+  ]
+}
