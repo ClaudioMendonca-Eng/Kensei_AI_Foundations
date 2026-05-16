@@ -1,0 +1,123 @@
+{
+  "name": "01 - Agente Basico (Chat + Tools)",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "s06-pdf-01-0001",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [220, 280]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "pergunta",
+              "value": "Quanto e 47 * 893 e o que e CVE-2024-3094?"
+            }
+          ]
+        }
+      },
+      "id": "s06-pdf-01-0002",
+      "name": "Set - Pergunta",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [430, 280]
+    },
+    {
+      "parameters": {
+        "jsCode": "const pergunta = String($json.pergunta || '');\nconst match = pergunta.match(/(\\d+)\\s*([+\\-*/])\\s*(\\d+)/);\nlet calculo = 'sem_calculo';\nif (match) {\n  const a = Number(match[1]);\n  const op = match[2];\n  const b = Number(match[3]);\n  if (op === '+') calculo = String(a + b);\n  if (op === '-') calculo = String(a - b);\n  if (op === '*') calculo = String(a * b);\n  if (op === '/') calculo = b !== 0 ? String(a / b) : 'divisao_por_zero';\n}\nreturn [{ json: { ...$json, tool_calculator: calculo } }];"
+      },
+      "id": "s06-pdf-01-0003",
+      "name": "Code - Tool Calculator",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [660, 280]
+    },
+    {
+      "parameters": {
+        "url": "https://pt.wikipedia.org/api/rest_v1/page/summary/Seguran%C3%A7a_da_informa%C3%A7%C3%A3o",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "User-Agent",
+              "value": "KenseiAIFoundations/1.0 (n8n workflow training; contact: local-admin)"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "s06-pdf-01-0004",
+      "name": "HTTP - Tool Wikipedia",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [900, 280]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "key",
+              "value": "={{ $env.GOOGLE_API_KEY || '' }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { contents: [ { role: 'user', parts: [ { text: `Voce e um agente basico com duas tools: calculadora e wikipedia. Responda de forma curta e objetiva.\\n\\nPergunta: ${$('Set - Pergunta').first().json.pergunta}\\nResultado calculadora: ${$('Code - Tool Calculator').first().json.tool_calculator}\\nResumo Wikipedia: ${$json.extract || 'sem_dados'}` } ] } ], generationConfig: { temperature: 0.3 } } }}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "s06-pdf-01-0005",
+      "name": "Gemini - Agente Basico",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1160, 280]
+    }
+  ],
+  "connections": {
+    "Manual Trigger": {
+      "main": [[{ "node": "Set - Pergunta", "type": "main", "index": 0 }]]
+    },
+    "Set - Pergunta": {
+      "main": [[{ "node": "Code - Tool Calculator", "type": "main", "index": 0 }]]
+    },
+    "Code - Tool Calculator": {
+      "main": [[{ "node": "HTTP - Tool Wikipedia", "type": "main", "index": 0 }]]
+    },
+    "HTTP - Tool Wikipedia": {
+      "main": [[{ "node": "Gemini - Agente Basico", "type": "main", "index": 0 }]]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "semana06-pdf-01-v1",
+  "meta": {
+    "templateCredsSetupCompleted": false,
+    "instanceId": "kensei-ai-foundations-semana06"
+  },
+  "id": "workflow-pdf-01-kensei-s06",
+  "tags": [
+    { "name": "kensei-s06" },
+    { "name": "pdf" },
+    { "name": "agent" }
+  ]
+}

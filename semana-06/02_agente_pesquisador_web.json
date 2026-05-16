@@ -1,0 +1,185 @@
+{
+  "name": "02 - Agente Pesquisador Web",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "s06-pdf-02-0001",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        220,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "tema",
+              "value": "Top ameaças de ransomware para SOC"
+            }
+          ]
+        }
+      },
+      "id": "s06-pdf-02-0002",
+      "name": "Set - Tema",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [
+        430,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://serpapi.com/search.json",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "q",
+              "value": "={{ $json.tema }}"
+            },
+            {
+              "name": "hl",
+              "value": "pt"
+            },
+            {
+              "name": "gl",
+              "value": "br"
+            },
+            {
+              "name": "api_key",
+              "value": "={{ $env.SERPAPI_API_KEY || '' }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "s06-pdf-02-0003",
+      "name": "HTTP - SerpAPI",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        660,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://pt.wikipedia.org/api/rest_v1/page/summary/Ransomware",
+        "options": {}
+      },
+      "id": "s06-pdf-02-0004",
+      "name": "HTTP - Wikipedia",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        890,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "key",
+              "value": "={{ $env.GOOGLE_API_KEY || '' }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { contents: [ { role: 'user', parts: [ { text: `Voce e um agente de IA para SOC. Analise os dados do item atual e responda de forma objetiva.\\n\\nDados:\\n${JSON.stringify($json, null, 2)}` } ] } ], generationConfig: { temperature: 0.3 } } }}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "s06-pdf-02-0005",
+      "name": "Gemini - Consolidar Pesquisa",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1140,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "Set - Tema",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set - Tema": {
+      "main": [
+        [
+          {
+            "node": "HTTP - SerpAPI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP - SerpAPI": {
+      "main": [
+        [
+          {
+            "node": "HTTP - Wikipedia",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP - Wikipedia": {
+      "main": [
+        [
+          {
+            "node": "Gemini - Consolidar Pesquisa",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "semana06-pdf-02-v1",
+  "meta": {
+    "templateCredsSetupCompleted": false,
+    "instanceId": "kensei-ai-foundations-semana06"
+  },
+  "id": "workflow-pdf-02-kensei-s06",
+  "tags": [
+    {
+      "name": "kensei-s06"
+    },
+    {
+      "name": "pdf"
+    },
+    {
+      "name": "research"
+    }
+  ]
+}

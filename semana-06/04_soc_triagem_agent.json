@@ -1,0 +1,222 @@
+{
+  "name": "04 - SOC Triagem Agent",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "soc-triagem-agent",
+        "responseMode": "responseNode"
+      },
+      "id": "s06-pdf-04-0001",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        220,
+        320
+      ],
+      "webhookId": "kensei-s06-soc-triagem-agent"
+    },
+    {
+      "parameters": {
+        "url": "={{ 'https://www.virustotal.com/api/v3/ip_addresses/' + ($json.ip || '') }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "x-apikey",
+              "value": "={{ $env.VIRUSTOTAL_API_KEY || '' }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "s06-pdf-04-0002",
+      "name": "HTTP - VirusTotal IP",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        480,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://urlscan.io/api/v1/search/",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "q",
+              "value": "={{ 'domain:' + ($('Webhook').first().json.url || '') }}"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "API-Key",
+              "value": "={{ $env.URLSCAN_API_KEY || '' }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "s06-pdf-04-0003",
+      "name": "HTTP - URLScan",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        480,
+        420
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "combine"
+      },
+      "id": "s06-pdf-04-0004",
+      "name": "Merge - IOC Data",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3,
+      "position": [
+        740,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "key",
+              "value": "={{ $env.GOOGLE_API_KEY || '' }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { contents: [ { role: 'user', parts: [ { text: `Voce e um agente de IA para SOC. Analise os dados do item atual e responda de forma objetiva.\\n\\nDados:\\n${JSON.stringify($json, null, 2)}` } ] } ], generationConfig: { temperature: 0.3 } } }}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "s06-pdf-04-0005",
+      "name": "Gemini - SOC Triagem",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1020,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { ok: true, entrada: $('Webhook').first().json, analise: ($json.candidates?.[0]?.content?.parts?.[0]?.text || '') || '{}', processado_em: $now.toISO(), workflow: '04_soc_triagem_agent' } }}",
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "id": "s06-pdf-04-0006",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        1280,
+        320
+      ]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "HTTP - VirusTotal IP",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "HTTP - URLScan",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP - VirusTotal IP": {
+      "main": [
+        [
+          {
+            "node": "Merge - IOC Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP - URLScan": {
+      "main": [
+        [
+          {
+            "node": "Merge - IOC Data",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge - IOC Data": {
+      "main": [
+        [
+          {
+            "node": "Gemini - SOC Triagem",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gemini - SOC Triagem": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "semana06-pdf-04-v1",
+  "meta": {
+    "templateCredsSetupCompleted": false,
+    "instanceId": "kensei-ai-foundations-semana06"
+  },
+  "id": "workflow-pdf-04-kensei-s06",
+  "tags": [
+    {
+      "name": "kensei-s06"
+    },
+    {
+      "name": "pdf"
+    },
+    {
+      "name": "soc"
+    }
+  ]
+}

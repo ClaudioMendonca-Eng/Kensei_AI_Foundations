@@ -11,48 +11,57 @@
       "name": "Webhook",
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2,
-      "position": [220, 300],
+      "position": [
+        220,
+        300
+      ],
       "webhookId": "kensei-s06-phishing-triagem"
     },
     {
       "parameters": {
-        "resource": "chat",
-        "operation": "complete",
-        "model": "gpt-4o-mini",
-        "messages": {
-          "values": [
+        "method": "POST",
+        "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
             {
-              "role": "system",
-              "content": "Voce e um agente SOC especialista em phishing. Analise o payload e responda APENAS em JSON valido com as chaves: classificacao (phishing|suspeito|legitimo), prioridade (baixa|media|alta), score_risco (0-100), sinais_detectados (array), acao_imediata (array), resposta_usuario (string curta e clara), precisa_escalonar (true|false)."
-            },
-            {
-              "role": "user",
-              "content": "={{ `Analise este caso:\\n${JSON.stringify($json, null, 2)}` }}"
+              "name": "key",
+              "value": "={{ $env.GOOGLE_API_KEY || '' }}"
             }
           ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { contents: [ { role: 'user', parts: [ { text: `Voce e um agente de IA para SOC. Analise os dados do item atual e responda de forma objetiva.\\n\\nDados:\\n${JSON.stringify($json, null, 2)}` } ] } ], generationConfig: { temperature: 0.3 } } }}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
         }
       },
       "id": "f1a2b3c4-0001-4000-8000-000000000002",
-      "name": "OpenAI - Analisar Phishing",
-      "type": "n8n-nodes-base.openAi",
-      "typeVersion": 1,
-      "position": [480, 300],
-      "credentials": {
-        "openAiApi": {
-          "id": "CONFIGURE_AQUI",
-          "name": "OpenAI API"
-        }
-      }
+      "name": "Gemini - Analisar Phishing",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        480,
+        300
+      ]
     },
     {
       "parameters": {
-        "jsCode": "const raw = $json.message?.content || '{}';\nlet analise;\n\ntry {\n  analise = JSON.parse(raw);\n} catch (e) {\n  analise = {\n    classificacao: 'suspeito',\n    prioridade: 'media',\n    score_risco: 50,\n    sinais_detectados: ['falha_ao_parsear_saida_da_ia'],\n    acao_imediata: ['revisar_manual'],\n    resposta_usuario: 'Recebemos seu reporte e vamos analisar manualmente.',\n    precisa_escalonar: false\n  };\n}\n\nconst prioridade = String(analise.prioridade || 'media').toLowerCase();\nconst score = Number(analise.score_risco || 0);\n\nconst sla_minutos = prioridade === 'alta' || score >= 80 ? 15 : prioridade === 'media' ? 60 : 240;\n\nreturn [{\n  json: {\n    entrada: $('Webhook').item.json,\n    analise,\n    sla_minutos,\n    processado_em: new Date().toISOString(),\n    workflow: '05_agente_antiphishing'\n  }\n}];"
+        "jsCode": "const raw = ($json.candidates?.[0]?.content?.parts?.[0]?.text || '') || '{}';\nlet analise;\n\ntry {\n  analise = JSON.parse(raw);\n} catch (e) {\n  analise = {\n    classificacao: 'suspeito',\n    prioridade: 'media',\n    score_risco: 50,\n    sinais_detectados: ['falha_ao_parsear_saida_da_ia'],\n    acao_imediata: ['revisar_manual'],\n    resposta_usuario: 'Recebemos seu reporte e vamos analisar manualmente.',\n    precisa_escalonar: false\n  };\n}\n\nconst prioridade = String(analise.prioridade || 'media').toLowerCase();\nconst score = Number(analise.score_risco || 0);\n\nconst sla_minutos = prioridade === 'alta' || score >= 80 ? 15 : prioridade === 'media' ? 60 : 240;\n\nreturn [{\n  json: {\n    entrada: $('Webhook').item.json,\n    analise,\n    sla_minutos,\n    processado_em: new Date().toISOString(),\n    workflow: '05_agente_antiphishing'\n  }\n}];"
       },
       "id": "f1a2b3c4-0001-4000-8000-000000000003",
       "name": "Code - Estruturar Saida",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [740, 300]
+      "position": [
+        740,
+        300
+      ]
     },
     {
       "parameters": {
@@ -68,7 +77,10 @@
       "name": "IF - Escalonar?",
       "type": "n8n-nodes-base.if",
       "typeVersion": 2,
-      "position": [990, 300]
+      "position": [
+        990,
+        300
+      ]
     },
     {
       "parameters": {
@@ -86,7 +98,10 @@
       "name": "Set - Escalonar",
       "type": "n8n-nodes-base.set",
       "typeVersion": 2,
-      "position": [1240, 220]
+      "position": [
+        1240,
+        220
+      ]
     },
     {
       "parameters": {
@@ -104,7 +119,10 @@
       "name": "Set - N1",
       "type": "n8n-nodes-base.set",
       "typeVersion": 2,
-      "position": [1240, 380]
+      "position": [
+        1240,
+        380
+      ]
     },
     {
       "parameters": {
@@ -114,7 +132,10 @@
       "name": "Merge",
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3,
-      "position": [1470, 300]
+      "position": [
+        1470,
+        300
+      ]
     },
     {
       "parameters": {
@@ -128,7 +149,10 @@
       "name": "Respond to Webhook",
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1,
-      "position": [1700, 300]
+      "position": [
+        1700,
+        300
+      ]
     }
   ],
   "connections": {
@@ -136,14 +160,14 @@
       "main": [
         [
           {
-            "node": "OpenAI - Analisar Phishing",
+            "node": "Gemini - Analisar Phishing",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "OpenAI - Analisar Phishing": {
+    "Gemini - Analisar Phishing": {
       "main": [
         [
           {
