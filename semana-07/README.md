@@ -194,6 +194,8 @@ Arquivo: `06_gamer_hack.py`
 
 Simulação educacional de hacking estilo **Grey Hack** com terminal interativo, missões progressivas e sistema de recompensas. Todos os hosts, IPs e vulnerabilidades são **completamente fictícios**.
 
+Link de acesso rápido: [Kensei GAME HACK](https://kensei-game-hack-claudio.streamlit.app)
+
 ### 🖥️ Funcionalidades
 
 - **Terminal interativo** com ~15 comandos reais: `nmap`, `exploit`, `crack`, `dump`, `pivot`, `ls`, `download`, `buy`

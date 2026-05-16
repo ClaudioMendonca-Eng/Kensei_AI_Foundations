@@ -421,13 +421,14 @@ Pensamento AI-first                    Projeto capstone completo
 
 **Pasta:** `semana-07/`
 
-- Construção dos 5 projetos oficiais da aula de Streamlit.
+- Construção dos 5 projetos oficiais da aula de Streamlit + 1 projeto bônus autoral.
 - Dashboard de Cyber Attacks com dados reais, **tema dark moderno**, **mapa mundial interativo com click-to-details**, sidebar com filtros avançados e 5+ abas temáticas.
 - Chatbot web moderno com **Google Gemini 2.5-flash**, histórico de conversas persistente, sugestões rápidas clicáveis, auto-continuação de respostas longas e tratamento robusto de quota.
 - Analisador de PDF com IA: upload, extração de até 10 páginas e resumo estruturado com Gemini.
 - **Projeto 5 Modernizado**: Integração SOC com n8n + Gemini:  
   - **Workflow n8n** com pipeline completo: Webhook → Classificação → **Gemini IA para playbook** → Consolidação → Response JSON
   - **Streamlit P5** com UI SOC profissional: dark theme, **alert icons por prioridade** (🔴 alta, 🟡 média, 🟢 baixa), **teste de performance** com 5 requisições, métricas de latência e taxa de sucesso.
+- **Projeto 6 Bônus (Grey Hack)**: Simulação CTF com terminal interativo, missões progressivas, economia de créditos/XP, mapa de rede com 12 hosts fictícios e gameplay educacional focado em red team.
 - Foco em transformar scripts em apps web prontos para demonstração, deploy e operação em produção.
 
 **Apps e arquivos:**
@@ -440,6 +441,7 @@ Pensamento AI-first                    Projeto capstone completo
 | `04_analisador_pdf_ia.py` | Upload de PDF + resumo com IA | Extração até 10 páginas, prompt estruturado SOC |
 | `05_soc_streamlit_n8n.py` | Front-end SOC + webhook n8n | UI moderna, icons de prioridade, teste de performance |
 | `05_agente_n8n_soc_webhook.json` | Workflow n8n importável | Webhook → Classificação → Gemini → Consolidação |
+| `06_gamer_hack.py` | Game estilo Grey Hack em Streamlit | Terminal interativo, comandos CTF, missões e progressão |
 | `requirements.txt` | Dependências | streamlit, pandas, plotly, google-generativeai, pypdf, requests |
 
 **Conceitos-chave:**
@@ -449,6 +451,7 @@ Pensamento AI-first                    Projeto capstone completo
 - **IA aplicada** com Google Gemini em chat, análise documental e geração de playbooks.
 - **n8n + IA** com HTTP Request para Gemini API, consolidação de respostas estruturadas.
 - **Performance monitoring** com métricas de latência, taxa de sucesso e teste de carga.
+- **Gamificação técnica** com simulação de operações ofensivas em ambiente totalmente fictício.
 - **Integração produção** com webhook para operações SOC em tempo real.
 
 **Arquivos-chave:**
@@ -457,6 +460,7 @@ Pensamento AI-first                    Projeto capstone completo
 - [`semana-07/03_chatbot_web_ia.py`](semana-07/03_chatbot_web_ia.py) (chat com Gemini)
 - [`semana-07/05_soc_streamlit_n8n.py`](semana-07/05_soc_streamlit_n8n.py) (SOC UI moderna)
 - [`semana-07/05_agente_n8n_soc_webhook.json`](semana-07/05_agente_n8n_soc_webhook.json) (workflow Gemini)
+- [`semana-07/06_gamer_hack.py`](semana-07/06_gamer_hack.py) (simulação Grey Hack / CTF)
 
 ---
 
