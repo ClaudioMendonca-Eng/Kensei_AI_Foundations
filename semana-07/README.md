@@ -6,7 +6,7 @@
 ---
 
 <p align="center">
-    <img src="../img/Kensei_AI_Foundations_S07_streamlit.png" alt="Semana 7 - Streamlit na pratica" width="1100">
+    <img src="../img/Kensei_AI_Foundations_S07_Streamlit.png" alt="Semana 7 - Streamlit na pratica" width="1100">
 </p>
 
 ---
