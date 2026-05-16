@@ -8,6 +8,7 @@ Todos os IPs, hosts e vulnerabilidades sao FICTICIOS.
 
 import random
 from datetime import datetime
+from pathlib import Path
 
 import streamlit as st
 
@@ -135,6 +136,33 @@ p, li { font-family: 'Courier New', monospace; color: #006616; font-size: 0.8rem
 h1, h2, h3, h4 { font-family: 'Courier New', monospace !important; color: #00ff41 !important; }
 .stMetric label { font-family: 'Courier New', monospace !important; color: #006616 !important; font-size: 0.75rem !important; }
 .stMetric [data-testid="metric-container"] { color: #00ff41 !important; }
+.header-logo-wrap { text-align: right; }
+.course-footer {
+    margin-top: 1.2rem;
+    background: linear-gradient(180deg, #050505 0%, #071108 100%);
+    border: 1px solid #1a3a1a;
+    border-radius: 8px;
+    padding: 1rem 1.1rem;
+    font-family: 'Courier New', monospace;
+}
+.course-footer h4 {
+    margin: 0 0 0.45rem 0;
+    color: #00ff41 !important;
+    letter-spacing: 1px;
+}
+.course-footer p,
+.course-footer li {
+    color: #80d88f;
+    font-size: 0.78rem;
+    margin: 0.2rem 0;
+}
+.course-footer a {
+    color: #58a6ff !important;
+    text-decoration: none;
+}
+.course-footer a:hover {
+    text-decoration: underline;
+}
 </style>
 """,
     unsafe_allow_html=True,
@@ -633,9 +661,17 @@ def process_command(raw: str):  # noqa: PLR0912, PLR0915 (game logic)
 
 # ─── Game Init ────────────────────────────────────────────────────────────────────
 init_game()
+LOGO_PATH = Path(__file__).resolve().parents[1] / "img" / "logo_kensei.png"
 
 # ─── Header ───────────────────────────────────────────────────────────────────────
-st.markdown('<div class="main-title">💀 GREY HACK // KENSEI TERMINAL</div>', unsafe_allow_html=True)
+header_left, header_right = st.columns([4, 2])
+with header_left:
+    st.markdown('<div class="main-title">💀 GREY HACK // KENSEI TERMINAL</div>', unsafe_allow_html=True)
+with header_right:
+    st.markdown('<div class="header-logo-wrap">', unsafe_allow_html=True)
+    if LOGO_PATH.exists():
+        st.image(str(LOGO_PATH), width=280)
+    st.markdown('</div>', unsafe_allow_html=True)
 st.markdown('<div class="sub-title">SIMULAÇÃO FICTÍCIA DE HACKING  //  APENAS PARA FINS EDUCACIONAIS</div>', unsafe_allow_html=True)
 st.divider()
 
@@ -935,3 +971,20 @@ Nenhum sistema real é alvo ou comprometido nesta simulação.
 
 *Kensei AI Foundations — Semana 7 — Projeto 6*
 """)
+
+st.divider()
+st.markdown(
+        """
+<div class="course-footer">
+    <h4>Repositorio Principal | Kensei AI Foundations</h4>
+    <p>Curso pratico de 8 semanas com foco em IA, dados, automacao e cybersecurity, construindo portfolio real com Python, n8n e Streamlit.</p>
+    <ul>
+        <li><b>Trilha:</b> Python do zero, analise de dados, APIs de IA, agentes n8n e apps web.</li>
+        <li><b>Semana 7:</b> dashboards, chatbot com Gemini, analisador de PDF, SOC com webhook e game CTF.</li>
+        <li><b>Repositorio principal:</b> consulte o arquivo README.md na raiz do projeto.</li>
+        <li><b>Material da semana:</b> consulte semana-07/README.md para os detalhes dos projetos.</li>
+    </ul>
+</div>
+""",
+        unsafe_allow_html=True,
+)
