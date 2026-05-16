@@ -182,6 +182,9 @@ streamlit run 05_soc_streamlit_n8n.py
 
 <p align="center">
     <img src="../img/Kensei_AI_Foundations_S07_Streamlit-05_soc_streamlit_n8n01.png" alt="Semana 7 - Streamlit na pratica" width="1100">
+    <img src="../img/Kensei_AI_Foundations_S07_Streamlit-05_soc_streamlit_n8n02.png" alt="Semana 7 - Streamlit na pratica" width="1100">
+    <img src="../img/Kensei_AI_Foundations_S07_Streamlit-05_soc_streamlit_n8n03.png" alt="Semana 7 - Streamlit na pratica" width="1100">
+    <img src="../img/Kensei_AI_Foundations_S07_Streamlit-05_soc_streamlit_n8n04.png" alt="Semana 7 - Streamlit na pratica" width="1100">
 </p>
 
 ---
