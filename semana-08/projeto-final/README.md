@@ -4,6 +4,14 @@ Projeto final da Semana 8 em formato de card game educacional sobre estrategia c
 
 A proposta do app e ensinar conceitos de ataque e defesa (Red Team vs Blue Team) com uma experiencia visual estilo trading card game, usando IA para enriquecer explicacoes, contexto e interacao.
 
+## Demo online
+
+Jogue agora na versao publicada:
+
+- https://redteam-blueteam-osi-ia-card.streamlit.app/
+
+Observacao: na primeira abertura, o Streamlit pode levar alguns segundos para inicializar o app.
+
 ## Objetivo do projeto
 
 - Transformar estudo de ciberseguranca em uma experiencia pratica e interativa
@@ -201,4 +209,46 @@ Tambem foram organizadas duas tabelas de prompts:
 - As imagens foram salvas na pasta `img/` com os nomes correspondentes para uso no app.
 - O processo de criacao de imagens foi eficiente, permitindo gerar um grande numero de assets visuais em pouco tempo.
 - As imagens criadas enriqueceram significativamente a experiencia visual do Card Arena, contribuindo para a imersao e atratividade do jogo.
+
+### Prints de exemplo do processo de criacao das imagens:
+
+<p align="center">
+    <img src="./img/print01.png" alt="Tela inicio do jogo" width="1100">
+</p>
+
+<p align="center">
+    <img src="./img/print02.png" alt="Escolha do time" width="1100">
+</p>
+
+<p align="center">
+    <img src="./img/print03.png" alt="Escolha dos personagens" width="1100">
+</p>
+
+<p align="center">
+    <img src="./img/print04.png" alt="Exemplo de partida" width="1100">
+</p>
+
+<p align="center">
+    <img src="./img/print05.png" alt="Tela de vitoria" width="1100">
+</p>
+
+<p align="center">
+    <img src="./img/print06.png" alt="Tela de derrota" width="1100">
+</p>
+
+<p align="center">
+    <img src="./img/print07.png" alt="Tela de empate" width="1100">
+</p>
+
+<p align="center">
+    <img src="./img/print08.png" alt="Tela de escolha de cartas" width="1100">
+</p>
+
+<p align="center">
+    <img src="./img/print09.png" alt="Tela de resultado de jogada" width="1100">
+</p>
+
+<p align="center">
+    <img src="./img/print10.png" alt="Tela de resumo da partida" width="1100">
+</p>
 
