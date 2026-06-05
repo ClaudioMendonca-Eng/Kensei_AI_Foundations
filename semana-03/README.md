@@ -503,3 +503,13 @@ Fluxo:
 - Escrever README com conclusoes
 - Fazer push de tudo no GitHub
 - Experimentar Seaborn ou Plotly
+
+---
+
+## Resumo Pessoal
+
+Nesta semana eu consegui entender melhor como dados deixam de ser apenas tabelas e passam a virar informacao util. As explicacoes sobre Pandas, limpeza de dados, filtros e graficos fizeram mais sentido para mim porque tudo foi mostrado com exemplos praticos e com datasets reais.
+
+Eu acompanhei os exemplos, executei os scripts e percebi como cada etapa da analise tem um papel importante: primeiro explorar, depois limpar, em seguida filtrar, calcular indicadores e por fim visualizar. Isso me ajudou a organizar melhor meu raciocinio quando trabalho com dados.
+
+O que mais gostei foi ver que eu consegui sair do CSV bruto ate um dashboard e graficos salvos em PNG. Fazendo os exemplos na pratica, entendi que analise de dados nao e so teoria: e processo, repeticao e interpretacao. Essa semana me deu mais confianca para usar Python com dados reais.

@@ -200,3 +200,13 @@ Dica: prefira commits pequenos e frequentes.
 - Commitar e enviar para o GitHub
 - Pedir para a IA revisar seu codigo
 - Anotar o que ficou confuso para a proxima aula
+
+---
+
+## Resumo Pessoal
+
+Nesta semana eu consegui entender muito melhor a logica basica do Python porque as explicacoes foram apresentadas de forma simples e com exemplos diretos. Em vez de tentar decorar tudo, eu fui aprendendo na pratica, testando cada conceito no terminal e vendo o resultado acontecer passo a passo.
+
+Os exercicios me ajudaram bastante a fixar variaveis, listas, condicionais, loops e funcoes. Quando surgia alguma duvida, eu usei a IA como apoio para explicar erros, revisar o codigo e sugerir melhorias, o que deixou o aprendizado mais leve e mais rapido.
+
+No final, senti que nao fiquei so assistindo explicacao: eu realmente escrevi os exemplos, rodei os scripts e consegui enxergar como cada parte do Python pode ser usada em problemas reais. Foi a semana em que comecei a ganhar confianca para programar de verdade.

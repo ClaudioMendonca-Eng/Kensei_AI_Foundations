@@ -1,0 +1,25 @@
+﻿teste,status,latencia_s,prompt,resposta
+T1,ok,12.99,Resuma em 3 bullet points o que e phishing para iniciantes.,"Claro, vou resumir em 3 pontos básicos o que é phishing para iniciantes:
+
+• **O que é phishing?**: Phishing é um tipo de fraude cibernética onde os criminosos tentam enganar as pessoas para que elas forneçam informações confidenciais, como senhas, números de cartão de crédito ou dados pessoais.
+
+• **Como funciona o phishing?**: Os criminosos geralmente enviam e-mails ou mensagens de texto que parecem ser de uma fonte legítima (como um banco ou uma empresa) e pedem que a vítima forneça informações confidenciais. Eles podem usar técnicas como a criação de sites falsos que imitam os sites legítimos para enganar as pessoas.
+
+• **Como se proteger do phishing?**: Para se proteger do phishing, é im"
+T2,ok,14.84,"Classifique o texto 'Recebi email pedindo senha urgente' como risco baixo, medio ou alto e explique.","Eu classificaria o texto ""Recebi email pedindo senha urgente"" como um risco médio.
+
+Aqui estão as razões pelas quais eu cheguei a essa conclusão:
+
+1. **Conteúdo neutro**: O texto não contém informações específicas que sugiram uma ameaça ou fraude, como por exemplo, pedidos de dinheiro ou informações pessoais sensíveis.
+2. **Natureza comum**: Pedidos de senha urgente são comuns em situações legítimas, como quando alguém se esquece da senha e precisa dela para acessar uma conta.
+3. **Falta de detalhes**: O texto não fornece informações adicionais que sugiram uma ameaça ou fraude, como por exemplo, mensagens de assinatura que pareçam suspeitas ou links maliciosos.
+
+No entanto, é importante lemb"
+T3,ok,18.60,Gere uma recomendacao curta para melhorar a seguranca de senha em uma empresa pequena.,"**Melhorando a Segurança de Senhas em uma Empresa Pequena**
+
+Aqui estão algumas recomendações curtas para melhorar a segurança de senhas em sua empresa:
+
+1.  **Use senhas fortes**: As senhas devem ser longas (no mínimo 12 caracteres) e incluir uma mistura de números, letras maiúsculas e minúsculas.
+2.  **Evite palavras comuns**: Evite usar palavras ou frases que possam ser facilmente adivinhadas por outros, como nomes de familiares ou datas importantes.
+3.  **Mantenha as senhas atualizadas**: As senhas devem ser atualizadas regularmente (a cada 90 dias) para evitar que os hackers adivinhem.
+4.  **Use autenticação de dois fatores**: A autenticação de dois fatores adiciona uma camada extra de "

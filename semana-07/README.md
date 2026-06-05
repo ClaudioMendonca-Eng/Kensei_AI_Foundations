@@ -287,3 +287,13 @@ Ao final da semana 07, voce tera:
 - chatbot e analisador de PDF integrados ao Google Gemini
 - agente n8n com webhook + Gemini gerando playbooks SOC
 - jogo de hacking estilo Grey Hack com terminal CTF interativo
+
+---
+
+## Resumo Pessoal
+
+Nesta semana eu entendi melhor como transformar scripts em aplicacoes web com cara de produto. As explicacoes fizeram bastante sentido porque cada projeto mostrou um uso diferente do Streamlit, desde interfaces simples ate apps mais completos com IA, visualizacao e integracao externa.
+
+Ao fazer os exemplos, percebi que nao basta o codigo funcionar: a forma como a pessoa interage com a aplicacao tambem importa. Isso ficou muito claro no dashboard, no chatbot, no analisador de PDF e principalmente no projeto com n8n e no jogo estilo Grey Hack.
+
+O que mais gostei foi ver que eu consegui construir interfaces que realmente demonstram o que aprendi ao longo do curso. Essa semana me deu uma visao muito mais pratica de como publicar, apresentar e transformar uma ideia em algo utilizavel por outras pessoas.

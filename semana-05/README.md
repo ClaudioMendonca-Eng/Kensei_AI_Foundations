@@ -461,6 +461,16 @@ Esses arquivos cobrem automações de:
 
 ---
 
+## Resumo Pessoal
+
+Nesta semana eu consegui entender melhor como a automacao pode economizar tempo de verdade. As explicacoes sobre n8n ficaram claras porque cada conceito foi ligado a um problema real, mostrando quando usar trigger, node, condicao, webhook e integracoes externas.
+
+Ao importar e analisar os workflows, eu percebi como um fluxo visual pode representar logicas que antes eu imaginava que exigiriam muito codigo. Fazer os exemplos me ajudou a enxergar melhor a sequencia das acoes e como a IA pode entrar no meio do processo para resumir, classificar ou responder automaticamente.
+
+O mais importante para mim foi entender que automacao nao e so comodidade, mas uma forma pratica de criar solucao util. Depois dessa semana, comecei a olhar tarefas repetitivas com outra mentalidade, pensando em como transformar processo manual em workflow inteligente.
+
+---
+
 > **Kensei CyberSec Lab | AI Foundations 2026**
 > *No-Code = Mais Tempo Pra Pensar.*
 > `voce.tempo += horas_economizadas`

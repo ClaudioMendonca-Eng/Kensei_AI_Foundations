@@ -555,3 +555,13 @@ git push
 - Dados CSV + API = relatório automático
 - Pedir IA melhorar cada projeto
 
+---
+
+## Resumo Pessoal
+
+Nesta semana eu entendi de forma muito mais clara como meu codigo pode conversar com modelos de IA usando APIs. As explicacoes ajudaram bastante porque mostraram desde o conceito mais simples ate exemplos reais funcionando, como assistente, tradutor, analisador e gerador de relatorios.
+
+Fazer os exemplos foi essencial para eu perceber que API nao e algo distante ou complicado. Quando rodei os scripts e vi respostas vindas do Gemini dentro do terminal, comecei a entender de verdade como integrar IA em ferramentas uteis para o dia a dia.
+
+O que mais me marcou foi juntar o que eu ja tinha aprendido em Python e dados com chamadas para IA. Isso me mostrou que eu nao estava estudando assuntos separados, mas montando uma base completa. No final da semana, consegui enxergar como transformar script simples em automacao inteligente.
+

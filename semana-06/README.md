@@ -354,3 +354,13 @@ Ao final da semana 06, voce tera:
 - 4 workflows principais alinhados ao PDF
 - 1 endpoint de triagem SOC (`soc-triagem-agent`)
 - 5 workflows anteriores preservados em `bonus/`
+
+---
+
+## Resumo Pessoal
+
+Nesta semana eu consegui entender melhor a diferenca entre automacao simples e fluxo com comportamento mais inteligente. As explicacoes sobre agentes ficaram mais claras para mim quando vi como contexto, ferramentas externas e resposta estruturada trabalham juntos dentro do n8n.
+
+Ao acompanhar os exemplos, percebi que um agente nao serve apenas para responder texto, mas tambem para pesquisar, interpretar dados e devolver uma saida pronta para uso em outro sistema. Isso ficou muito evidente nos casos de triagem SOC e pesquisa com APIs externas.
+
+Fazer esses exemplos me ajudou a amadurecer a forma como eu penso IA aplicada. Eu passei a entender melhor como desenhar um fluxo com entrada, enriquecimento, decisao e resposta final. Foi uma semana importante para ligar IA, automacao e contexto operacional de cybersecurity.

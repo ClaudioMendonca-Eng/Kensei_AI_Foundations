@@ -1,5 +1,18 @@
 # 🔒🤖 Kensei AI Foundations
 
+<a id="topo"></a>
+
+<p align="center">
+    <img src="https://img.shields.io/badge/Python-3.10%2B-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python 3.10+" />
+    <img src="https://img.shields.io/badge/Streamlit-Apps-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white" alt="Streamlit" />
+    <img src="https://img.shields.io/badge/n8n-Automation-EA4B71?style=for-the-badge&logo=n8n&logoColor=white" alt="n8n" />
+    <img src="https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker" />
+    <img src="https://img.shields.io/badge/IA-Generativa-0A66C2?style=for-the-badge&logo=openai&logoColor=white" alt="IA Generativa" />
+    <img src="https://img.shields.io/badge/Cybersecurity-SOC%20Focus-111111?style=for-the-badge&logo=shield&logoColor=white" alt="Cybersecurity SOC Focus" />
+    <img src="https://img.shields.io/badge/Semanas-8%2F8%20Concluidas-16A34A?style=for-the-badge" alt="8 de 8 semanas concluidas" />
+    <img src="https://img.shields.io/badge/Status-Portifolio%20Ativo-7C3AED?style=for-the-badge" alt="Status Portifolio Ativo" />
+</p>
+
 
 
 > **KENSEI CYBER AI ACADEMY — 100% GRATUITO**
@@ -17,9 +30,41 @@
     <img src="img/01-Kensei_AI_Foundations_Aula_Inaugural.png" alt="Semana 1 - Aula Inaugural" width="1100">
 </p>
 
+> [!NOTE]
+> **Kensei AI Foundations**
+> 
+> ***Autor:*** Claudio Mendonça - ***Data:*** 04/06/2026 - ***Versão:*** 1.1
+>
+> **Mestre:** [Jose Menezes](https://github.com/jcarlos78) - **Instrutores:** [Gilson Andrade](https://github.com/GilsonJunio) 
+
+---
+
+## Indice Rapido
+
+- [Aula Inaugural](#aula-inaugural--bem-vindos-à-comunidade)
+- [Quem e a Kensei](#quem-é-a-kensei)
+- [Sobre Mim](#sobre-mim)
+- [Por Que IA Agora](#por-que-ia-agora)
+- [Mapa da IA](#o-mapa-da-inteligência-artificial)
+- [Revolucao Transformer](#a-revolução-transformer)
+- [Como um LLM Funciona](#como-um-llm-funciona)
+- [O Que Vou Aprender](#o-que-vou-aprender)
+- [Trilha 8 Semanas](#a-trilha-8-semanas)
+- [Importancia para Cyber](#por-que-isso-importa-para-cyber)
+- [Como Vai Funcionar](#como-vai-funcionar)
+- [Expectativas](#alinhamento-de-expectativas)
+- [Proximos Passos](#próximos-passos)
+- [Progresso das Aulas](#progresso-das-aulas)
+- [Entregas por Semana](#entregas-por-semana)
+- [Resumo](#resumo)
+- [Referencias Bibliograficas](#-referências-bibliográficas)
+- [Vamos Construir Juntos](#vamos-construir-juntos)
+
 ---
 
 ## Aula Inaugural | Bem-vindos à Comunidade
+
+[⬆ Voltar ao topo](#topo)
 
 **IA | Dados | Programação | Automação | Apps**
 
@@ -30,6 +75,8 @@
 ---
 
 ## Quem é a Kensei?
+
+[⬆ Voltar ao topo](#topo)
 
 > **"Precisão de Samurai."**
 
@@ -48,6 +95,8 @@ Treinamos pessoas e empresas para o mundo onde o incidente não é **"se"**, é 
 
 ## Sobre Mim
 
+[⬆ Voltar ao topo](#topo)
+
 Sou estudante do **Kensei AI Foundations 2026**, um programa 100% gratuito de 6 meses focado em IA, Dados e Programação com visão prática voltada para o mercado.
 
 Minha trajetória começa aqui: construindo portfólio real, aprendendo com a comunidade e desenvolvendo as habilidades que o mercado AI-first exige.
@@ -57,6 +106,8 @@ Este repositório documenta meu aprendizado semana a semana — desde os primeir
 ---
 
 ## Por Que IA Agora?
+
+[⬆ Voltar ao topo](#topo)
 
 | Dado | Impacto |
 |------|---------|
@@ -70,6 +121,8 @@ Este repositório documenta meu aprendizado semana a semana — desde os primeir
 ---
 
 ## O Mapa da Inteligência Artificial
+
+[⬆ Voltar ao topo](#topo)
 
 ```
 INTELIGÊNCIA ARTIFICIAL (IA)
@@ -94,6 +147,8 @@ INTELIGÊNCIA ARTIFICIAL (IA)
 
 ## A Revolução: Transformer
 
+[⬆ Voltar ao topo](#topo)
+
 ### 2017 — "Attention Is All You Need"
 
 O Google publicou o paper que criou a arquitetura **Transformer**. A inovação: **Self-Attention** — o modelo aprende a prestar atenção nas partes mais relevantes do texto, processando tudo em paralelo.
@@ -110,6 +165,8 @@ O Google publicou o paper que criou a arquitetura **Transformer**. A inovação:
 
 ## Como um LLM Funciona?
 
+[⬆ Voltar ao topo](#topo)
+
 1. **Treinamento** — Consome bilhões de textos da internet, livros, código. Aprende padrões de linguagem.
 2. **Tokenização** — Texto é quebrado em "tokens" (pedaços de palavras). O modelo trabalha com números, não letras.
 3. **Self-Attention** — Para cada token, o modelo calcula quais outros tokens são mais relevantes para entender o contexto.
@@ -118,6 +175,8 @@ O Google publicou o paper que criou a arquitetura **Transformer**. A inovação:
 ---
 
 ## O Que Vou Aprender?
+
+[⬆ Voltar ao topo](#topo)
 
 | Tópico | Descrição |
 |--------|-----------|
@@ -131,6 +190,8 @@ O Google publicou o paper que criou a arquitetura **Transformer**. A inovação:
 ---
 
 ## A Trilha: 8 Semanas
+
+[⬆ Voltar ao topo](#topo)
 
 ### 📦 Módulo 1 | Semanas 1–4 — IA, Python & Dados
 
@@ -150,6 +211,8 @@ O Google publicou o paper que criou a arquitetura **Transformer**. A inovação:
 
 ## Por Que Isso Importa Para Cyber?
 
+[⬆ Voltar ao topo](#topo)
+
 ```
 AI Foundations                    →    Cyber AI Academy
 ──────────────────────────────────────────────────────
@@ -166,6 +229,8 @@ Pensamento AI-first                    Projeto capstone completo
 
 ## Como Vai Funcionar
 
+[⬆ Voltar ao topo](#topo)
+
 | Aspecto | Detalhe |
 |---------|---------|
 | 📅 **Quartas às 19h** | Encontros semanais ao vivo pela comunidade |
@@ -178,6 +243,8 @@ Pensamento AI-first                    Projeto capstone completo
 ---
 
 ## Alinhamento de Expectativas
+
+[⬆ Voltar ao topo](#topo)
 
 ### ✅ O Que Esperar
 
@@ -199,6 +266,8 @@ Pensamento AI-first                    Projeto capstone completo
 
 ## Próximos Passos
 
+[⬆ Voltar ao topo](#topo)
+
 - [x] **01** — Criar conta no GitHub
 - [x] **02** — Entrar no grupo WhatsApp e Discord da comunidade
 - [x] **03** — Instalar VS Code + Python no computador
@@ -207,6 +276,8 @@ Pensamento AI-first                    Projeto capstone completo
 ---
 
 ## Progresso das Aulas
+
+[⬆ Voltar ao topo](#topo)
 
 | Semana | Tema | Status |
 |--------|------|--------|
@@ -218,11 +289,13 @@ Pensamento AI-first                    Projeto capstone completo
 | S5 | Automação no-code com n8n | ✅ Concluída |
 | S6 | n8n + IA (agentes inteligentes) | ✅ Concluída |
 | S7 | Apps web com Streamlit + deploy | ✅ Concluída |
-| S8 | Projeto final + apresentação | 🔜 Em breve |
+| S8 | Projeto final + apresentação | ✅ Concluída |
 
 ---
 
 ## Entregas por Semana
+
+[⬆ Voltar ao topo](#topo)
 
 ### Semana 2 — Python do Zero + Vibe Coding
 
@@ -374,7 +447,7 @@ Pensamento AI-first                    Projeto capstone completo
 ### Semana 6 — n8n + IA (Agentes Inteligentes)
 
 <p align="center">
-    <a href="/semana-06/README.md" target="_blank"><img style="margin: 10px" height="500" width="800" src="img/Kensei_AI_Foundations_S06_agentes.png" alt="Semana 6 - n8n + IA (Agentes Inteligentes)"/></a>
+    <a href="/semana-06/README.md" target="_blank"><img style="margin: 10px" height="500" width="800" src="./img/Kensei_AI_Foundations_S06_agentes.png" alt="Semana 6 - n8n + IA (Agentes Inteligentes)"/></a>
     <p align="center"><strong style="color: #ff3b30;">Aviso: clique na imagem para acessar o material completo da semana 6 - n8n + IA (Agentes Inteligentes)</strong></p>
 </p>
 
@@ -413,7 +486,7 @@ Pensamento AI-first                    Projeto capstone completo
 ### Semana 7 — Apps web com Streamlit + deploy
 
 <p align="center">
-    <a href="/semana-07/README.md" target="_blank"><img style="margin: 10px" height="500" width="800" src="img/Kensei_AI_Foundations_S07_streamlit.png" alt="Semana 7 - Apps com Streamlit"/></a>
+    <a href="/semana-07/README.md" target="_blank"><img style="margin: 10px" height="500" width="800" src="./img/Kensei_AI_Foundations_S07_Streamlit.png" alt="Semana 7 - Apps com Streamlit"/></a>
     <p align="center"><strong style="color: #ff3b30;">Aviso: clique na imagem para acessar o material completo da semana 7 - Streamlit na prática</strong></p>
 </p>
 
@@ -464,7 +537,92 @@ Pensamento AI-first                    Projeto capstone completo
 
 ---
 
+### Semana 8 — IA Gratuita + Projeto Final
+
+<p align="center">
+    <a href="/semana-08/README.md" target="_blank"><img style="margin: 10px" height="500" width="800" src="img/Kensei_AI_Foundations_S08_IA_Gratuita_Projeto_final.png" alt="Semana 8 - IA Gratuita e Projeto Final"/></a>
+    <p align="center"><strong style="color: #ff3b30;">Aviso: clique na imagem para acessar o material completo da semana 8 - IA Gratuita e Projeto Final</strong></p>
+</p>
+
+---
+
+**Pasta:** `semana-08/`
+
+- Validação prática com IA local gratuita usando **Ollama + Docker + Streamlit**.
+- Testes com prompt livre e bateria padronizada para medir qualidade e latência.
+- Consolidação de evidências de execução e decisão técnica de provedor.
+- Entrega de **projeto final funcional** com documentação completa e publicável.
+
+**Projeto final da turma:**
+
+- **Red Team vs Blue Team // Card Arena** em Streamlit.
+- Experiência educacional gamificada para conceitos de ataque e defesa em cybersecurity.
+- Suporte a múltiplos provedores de IA (local e nuvem).
+
+**Arquivos-chave:**
+- [`semana-08/README.md`](semana-08/README.md)
+- [`semana-08/exercicio-ia-gratuita-ollama/README.md`](semana-08/exercicio-ia-gratuita-ollama/README.md)
+- [`semana-08/projeto-final/README.md`](semana-08/projeto-final/README.md)
+- [`semana-08/projeto-final/RedTeam_BlueTeam_OSI_IA_card.py`](semana-08/projeto-final/RedTeam_BlueTeam_OSI_IA_card.py)
+
+---
+## Resumo
+
+[⬆ Voltar ao topo](#topo)
+
+Participar do Kensei AI Foundations foi um divisor de aguas na minha jornada. Entrei buscando uma base em IA, dados e programacao, e terminei com uma visao muito mais clara de como transformar estudo em projeto real, com aplicacao pratica e foco no mercado.
+Ao longo das semanas, evolui muito na confianca para construir, testar, errar, corrigir e publicar. O curso me ajudou a sair da teoria e ganhar ritmo de execucao com Python, analise de dados, automacoes, APIs e apps com IA.
+O que mais gostei foi a proposta mao na massa, com desafios progressivos e um direcionamento muito objetivo. Cada entrega virou parte do meu portfolio e me mostrou que e possivel aprender tecnologia de forma estruturada, mesmo comecando do zero.
+Meu agradecimento especial a Kensei, aos mentores e a toda comunidade pelo suporte durante essa jornada. Obrigado por compartilharem conhecimento de forma acessivel, pratica e inspiradora. Sigo para os proximos passos com mais preparo, foco e motivacao.
+
+## 📚 REFERÊNCIAS BIBLIOGRÁFICAS
+
+[⬆ Voltar ao topo](#topo)
+
+### **Ferramentas e Documentação Técnica:**
+
+- Python Software Foundation. *Python Documentation*. Disponível em: https://docs.python.org/3/
+- Streamlit. *Streamlit Documentation*. Disponível em: https://docs.streamlit.io/
+- Pandas. *Pandas Documentation*. Disponível em: https://pandas.pydata.org/docs/
+- Matplotlib. *Matplotlib Documentation*. Disponível em: https://matplotlib.org/stable/users/index
+- Plotly. *Python Graphing Library Documentation*. Disponível em: https://plotly.com/python/
+- Requests. *Requests: HTTP for Humans*. Disponível em: https://requests.readthedocs.io/
+- HTTPX. *HTTPX Documentation*. Disponível em: https://www.python-httpx.org/
+- PyPDF. *pypdf Documentation*. Disponível em: https://pypdf.readthedocs.io/
+- python-dotenv. *python-dotenv Documentation*. Disponível em: https://saurabh-kumar.com/python-dotenv/
+
+### **IA Generativa e APIs:**
+
+- OpenAI. *OpenAI API Platform Docs*. Disponível em: https://platform.openai.com/docs
+- OpenAI. *OpenAI Python SDK*. Disponível em: https://github.com/openai/openai-python
+- Anthropic. *Anthropic API Documentation*. Disponível em: https://docs.anthropic.com/
+- Anthropic. *Anthropic Python SDK*. Disponível em: https://github.com/anthropics/anthropic-sdk-python
+- Google AI for Developers. *Gemini API Documentation*. Disponível em: https://ai.google.dev/
+- Google. *google-generativeai (Python)*. Disponível em: https://pypi.org/project/google-generativeai/
+- Ollama. *Ollama Documentation*. Disponível em: https://ollama.com/docs
+
+### **Automação e Integrações:**
+
+- n8n. *n8n Documentation*. Disponível em: https://docs.n8n.io/
+- Docker. *Docker Documentation*. Disponível em: https://docs.docker.com/
+- Telegram. *Telegram Bot API*. Disponível em: https://core.telegram.org/bots/api
+- VirusTotal. *API v3 Documentation*. Disponível em: https://docs.virustotal.com/reference/overview
+- urlscan.io. *urlscan API Documentation*. Disponível em: https://urlscan.io/docs/api/
+- SerpAPI. *SerpAPI Documentation*. Disponível em: https://serpapi.com/search-api
+- Wikipedia. *REST API Documentation*. Disponível em: https://en.wikipedia.org/api/rest_v1/
+
+### **Fundamentos e Contexto Teórico:**
+
+- Vaswani, A., et al. (2017). *Attention Is All You Need*. arXiv:1706.03762. Disponível em: https://arxiv.org/abs/1706.03762
+- NIST. *Cybersecurity Framework (CSF) 2.0*. Disponível em: https://www.nist.gov/cyberframework
+
+
+
+
+
 ## Vamos Construir Juntos!
+
+[⬆ Voltar ao topo](#topo)
 
 **Kensei AI Foundations | Quartas às 19h | 100% Gratuito**
 
