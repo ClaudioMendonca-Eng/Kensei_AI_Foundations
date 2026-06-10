@@ -2062,6 +2062,8 @@ def init_state() -> None:
         st.session_state.show_ai_modal_card = False
     if "ai_test_result_card" not in st.session_state:
         st.session_state.ai_test_result_card = None
+    if "show_story_tts_settings_card" not in st.session_state:
+        st.session_state.show_story_tts_settings_card = False
     if "setup_wizard_card" not in st.session_state:
         st.session_state.setup_wizard_card = {
             "player_name": "ghost_operator",
@@ -3019,6 +3021,10 @@ def render_story_tts_settings_modal() -> None:
         "Dica: para maior naturalidade no Edge, instale vozes PT-BR no Windows e use 'Edge Natural'."
     )
 
+    if st.button("Fechar", use_container_width=True, key="close_story_tts_settings"):
+        st.session_state.show_story_tts_settings_card = False
+        st.rerun()
+
 
 def end_player_turn() -> None:
     game = get_game()
@@ -3345,7 +3351,8 @@ def render_game_screen_card() -> None:
             st.markdown("### Narrativa da Rodada")
         with story_cfg_col:
             if st.button("⚙️", key="open_story_tts_settings", help="Configurar narracao"):
-                render_story_tts_settings_modal()
+                st.session_state.show_story_tts_settings_card = True
+                st.rerun()
         story = game.get("last_story", "")
         if story:
             st.markdown(f"<div class='story-box'>{story}</div>", unsafe_allow_html=True)
@@ -3372,11 +3379,11 @@ def render_game_screen_card() -> None:
 
     if game["ended"]:
         render_end_modal(game)
-
-    if st.session_state.hand_modal_index is not None:
+    elif st.session_state.show_story_tts_settings_card:
+        render_story_tts_settings_modal()
+    elif st.session_state.hand_modal_index is not None:
         render_card_modal()
-
-    if st.session_state.board_modal_target is not None:
+    elif st.session_state.board_modal_target is not None:
         render_board_card_modal()
 
 
