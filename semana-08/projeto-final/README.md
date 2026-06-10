@@ -4,6 +4,11 @@ Projeto final da Semana 8 em formato de card game educacional sobre estrategia c
 
 A proposta do app e ensinar conceitos de ataque e defesa (Red Team vs Blue Team) com uma experiencia visual estilo trading card game, usando IA para enriquecer explicacoes, contexto e interacao.
 
+<p align="center">
+    <a href="https://redteam-blueteam-osi-ia-card.streamlit.app/" target="_blank"><img style="margin: 10px" height="500" width="800" src="../../img/Kensei_AI_Foundations_Projeto_final.png" alt="Projeto Final - Red Team vs Blue Team"/></a>
+    <p align="center"><strong style="color: #ff3b30;">Aviso: clique na imagem para acessar o JOGO do Projeto Final - Red Team vs Blue Team</strong></p>
+</p>
+
 ## Demo online
 
 Jogue agora na versao publicada:
@@ -213,11 +218,24 @@ Tambem foram organizadas duas tabelas de prompts:
 ### Prints de exemplo do processo de criacao das imagens:
 
 <p align="center">
+    A imagem abaixo mostra a tela inicial do Card Arena, com a identidade visual cyberpunk do projeto e o ponto de entrada para iniciar a experiencia Red Team vs Blue Team.
+</p>
+
+
+<p align="center">
     <img src="./img/print01.png" alt="Tela inicio do jogo" width="1100">
 </p>
 
 <p align="center">
+    A imagem abaixo mostra a tela de escolha do time, onde o jogador define seu codinome e seleciona entre RED TEAM ou BLUE TEAM para iniciar a partida.
+</p>
+
+<p align="center">
     <img src="./img/print02.png" alt="Escolha do time" width="1100">
+</p>
+
+<p align="center">
+    As imagens abaixo mostram a tela de escolha de doutrina, em que o jogador seleciona um personagem estrategico com estilo de jogo proprio para definir sua abordagem na partida.
 </p>
 
 <p align="center">
@@ -229,7 +247,15 @@ Tambem foram organizadas duas tabelas de prompts:
 </p>
 
 <p align="center">
+    A imagem abaixo mostra a tela de configuracao da IA adversaria, onde o jogador escolhe o provedor, ajusta modelo, endpoint e API Key, e testa a integracao antes de iniciar o jogo.
+</p>
+
+<p align="center">
     <img src="./img/print05.png" alt="Tela de vitoria" width="1100">
+</p>
+
+<p align="center">
+    A imagem abaixo mostra a tela principal da partida em andamento, com status do turno, cartas em campo, mao do jogador e opcoes taticas para decidir a melhor jogada.
 </p>
 
 <p align="center">
@@ -237,7 +263,15 @@ Tambem foram organizadas duas tabelas de prompts:
 </p>
 
 <p align="center">
+    A imagem abaixo mostra a tela de operacoes durante a rodada, com a mao do jogador para escolha de cartas, a narrativa dinamica dos eventos e os controles de narracao para acompanhar o combate em tempo real.
+</p>
+
+<p align="center">
     <img src="./img/print07.png" alt="Tela de empate" width="1100">
+</p>
+
+<p align="center">
+    A imagem abaixo mostra a tela Console de Batalha, com o registro cronologico das jogadas, combates e efeitos aplicados, facilitando a analise tatico-estrategica de cada turno.
 </p>
 
 <p align="center">
@@ -245,10 +279,21 @@ Tambem foram organizadas duas tabelas de prompts:
 </p>
 
 <p align="center">
+    A imagem abaixo mostra a tela Dashboard Status, que resume os indicadores da ofensiva (dano, rupturas, acoes e agentes ativos) e sugere proximas decisoes taticas para manter a pressao no turno.
+</p>
+
+<p align="center">
     <img src="./img/print09.png" alt="Tela de resultado de jogada" width="1100">
+</p>
+
+<p align="center">
+    A imagem abaixo mostra a tela Lore OSI, com a campanha ofensiva por camada, nivel de pressao em cada etapa da rede e leitura tatica dos eventos para orientar a proxima acao.
 </p>
 
 <p align="center">
     <img src="./img/print10.png" alt="Tela de resumo da partida" width="1100">
 </p>
 
+# Conclusao
+
+O projeto final do Card Arena Red Team vs Blue Team foi desenvolvido com sucesso, entregando uma experiencia educacional interativa e visualmente atraente para ensinar conceitos de ciberseguranca. O uso de IA para enriquecer a narrativa e o contexto das partidas adicionou uma camada extra de imersao e aprendizado. O app esta funcional, publicavel no GitHub, e pronto para evolucao futura com novas cartas, modos de jogo e desafios. A criacao das imagens com o Nano Banana seguiu os prompts especificados, resultando em um conjunto consistente e de alta qualidade que fortalece a identidade visual do projeto. O Card Arena tem potencial para ser uma ferramenta valiosa tanto para iniciantes quanto para profissionais de ciberseguranca, oferecendo uma maneira divertida e educativa de explorar as dinâmicas do Red Team vs Blue Team.

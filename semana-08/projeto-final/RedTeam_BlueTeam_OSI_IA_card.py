@@ -934,12 +934,41 @@ def provider_requires_api_key(provider: str) -> bool:
     return provider not in ("Local Offline", "Ollama", "LM Studio", "vLLM")
 
 
+GEMINI_MODEL_FALLBACKS = (
+    "gemini-2.5-flash",
+    "gemini-2.5-flash-lite",
+    "gemini-1.5-flash",
+)
+
+
+def gemini_model_candidates(model: str) -> list[str]:
+    preferred = normalize_gemini_model_name(model)
+    ordered: list[str] = []
+    if preferred:
+        ordered.append(preferred)
+    for candidate in GEMINI_MODEL_FALLBACKS:
+        if candidate not in ordered:
+            ordered.append(candidate)
+    return ordered
+
+
+def is_gemini_model_deprecated_error(http_code: int, body: str) -> bool:
+    if http_code != 404:
+        return False
+    lowered = body.lower()
+    return (
+        "no longer available" in lowered
+        or '"status": "not_found"' in lowered
+        or '"status":"not_found"' in lowered
+    )
+
+
 def provider_defaults(provider: str) -> tuple[str, str]:
     local_host = "host.docker.internal" if os.path.exists("/.dockerenv") else "localhost"
     defaults: dict[str, tuple[str, str]] = {
         "Local Offline": ("", ""),
         "OpenAI": ("gpt-4o-mini", "https://api.openai.com/v1/chat/completions"),
-        "Gemini": ("gemini-2.0-flash", "https://generativelanguage.googleapis.com/v1beta/models"),
+        "Gemini": ("gemini-2.5-flash", "https://generativelanguage.googleapis.com/v1beta/models"),
         "OpenAI Compatible": ("gpt-4o-mini", "https://api.openai.com/v1/chat/completions"),
         "Ollama": ("llama3.1:8b", f"http://{local_host}:11434/v1/chat/completions"),
         "LM Studio": ("local-model", "http://localhost:1234/v1/chat/completions"),
@@ -1036,20 +1065,40 @@ def call_openai_compatible(
 
 
 def call_gemini_generate_content(api_key: str, model: str, prompt: str) -> str:
-    model_name = normalize_gemini_model_name(model)
     safe_key = urllib.parse.quote_plus(api_key)
-    endpoint = f"https://generativelanguage.googleapis.com/v1beta/models/{model_name}:generateContent?key={safe_key}"
     payload = {
         "contents": [{"parts": [{"text": prompt}]}],
         "generationConfig": {"temperature": 0.3, "maxOutputTokens": 180},
     }
     data = json.dumps(payload).encode("utf-8")
 
-    req = urllib.request.Request(endpoint, data=data, method="POST")
-    req.add_header("Content-Type", "application/json")
+    last_exc: Exception | None = None
+    for model_name in gemini_model_candidates(model):
+        endpoint = f"https://generativelanguage.googleapis.com/v1beta/models/{model_name}:generateContent?key={safe_key}"
+        req = urllib.request.Request(endpoint, data=data, method="POST")
+        req.add_header("Content-Type", "application/json")
 
-    with urllib.request.urlopen(req, timeout=20) as resp:
-        raw = resp.read().decode("utf-8")
+        try:
+            with urllib.request.urlopen(req, timeout=20) as resp:
+                raw = resp.read().decode("utf-8")
+            break
+        except urllib.error.HTTPError as exc:
+            body = ""
+            try:
+                body = exc.read().decode("utf-8", errors="ignore")
+            except Exception:
+                body = ""
+            if is_gemini_model_deprecated_error(getattr(exc, "code", 0), body):
+                last_exc = exc
+                continue
+            raise
+        except Exception as exc:
+            last_exc = exc
+            raise
+    else:
+        if last_exc:
+            raise last_exc
+        raise RuntimeError("Falha ao obter resposta do Gemini")
 
     parsed = json.loads(raw)
     candidates = parsed.get("candidates", [])
@@ -2190,6 +2239,16 @@ def render_setup_ai_modal_card() -> None:
         if provider == "Gemini" and not wizard.get("endpoint"):
             wizard["endpoint"] = default_endpoint
 
+        pending_model = st.session_state.pop("pending_wizard_model", None)
+        if pending_model is not None:
+            wizard["model"] = pending_model
+            st.session_state["wizard_model"] = pending_model
+
+        pending_endpoint = st.session_state.pop("pending_wizard_endpoint", None)
+        if pending_endpoint is not None:
+            wizard["endpoint"] = pending_endpoint
+            st.session_state["wizard_endpoint"] = pending_endpoint
+
         if "wizard_model" not in st.session_state:
             st.session_state["wizard_model"] = wizard.get("model", default_model)
         if not st.session_state.get("wizard_model"):
@@ -2216,8 +2275,8 @@ def render_setup_ai_modal_card() -> None:
                 auto_model, auto_endpoint = provider_defaults(provider)
                 wizard["model"] = auto_model
                 wizard["endpoint"] = auto_endpoint
-                st.session_state["wizard_model"] = auto_model
-                st.session_state["wizard_endpoint"] = auto_endpoint
+                st.session_state["pending_wizard_model"] = auto_model
+                st.session_state["pending_wizard_endpoint"] = auto_endpoint
                 wizard["_last_api_key_for_autofill"] = clean_api_key
                 st.rerun()
         else:
@@ -2709,6 +2768,10 @@ def render_story_audio_controls(story: str) -> None:
         st.session_state.story_tts_pitch = 1.02
     if "story_tts_volume" not in st.session_state:
         st.session_state.story_tts_volume = 1.0
+    if "story_tts_voice_mode" not in st.session_state:
+        st.session_state.story_tts_voice_mode = "Automatico"
+    if "story_tts_voice_hint" not in st.session_state:
+        st.session_state.story_tts_voice_hint = ""
 
     st.session_state.story_tts_auto = st.toggle(
         "Auto narrar quando a narrativa mudar",
@@ -2743,6 +2806,8 @@ def render_story_audio_controls(story: str) -> None:
         "rate": st.session_state.story_tts_rate,
         "pitch": st.session_state.story_tts_pitch,
         "volume": st.session_state.story_tts_volume,
+        "voice_mode": st.session_state.get("story_tts_voice_mode", "Automatico"),
+        "voice_hint": st.session_state.get("story_tts_voice_hint", ""),
     }
 
     components.html(
@@ -2758,18 +2823,56 @@ def render_story_audio_controls(story: str) -> None:
             function scoreVoice(v) {{
                 const lang = (v.lang || "").toLowerCase();
                 const name = (v.name || "").toLowerCase();
+                const mode = String(payload.voice_mode || "Automatico").toLowerCase();
+                const voiceHint = String(payload.voice_hint || "").toLowerCase().trim();
                 let score = 0;
                 if (lang === "pt-br") score += 100;
                 else if (lang.startsWith("pt-br")) score += 95;
                 else if (lang.startsWith("pt")) score += 80;
                 if (/natural|neural|premium/.test(name)) score += 20;
                 if (/google|microsoft|luciana|francisca|heloisa|maria/.test(name)) score += 10;
+                if (mode === "edge natural") {{
+                    if (/microsoft|edge|online|natural|neural/.test(name)) score += 45;
+                    if (lang.startsWith("pt-br")) score += 20;
+                }}
+                if (voiceHint) {{
+                    if (name.includes(voiceHint)) score += 120;
+                    else if (voiceHint.split(/\\s+/).some(token => token && name.includes(token))) score += 40;
+                }}
                 if (v.localService) score += 4;
                 return score;
             }}
 
+            function normalizeKey(txt) {{
+                return String(txt || "")
+                    .toLowerCase()
+                    .normalize("NFD")
+                    .replace(/[\u0300-\u036f]/g, "")
+                    .trim();
+            }}
+
+            function pickVoiceByHint(voices) {{
+                const hint = normalizeKey(payload.voice_hint || "");
+                if (!hint || !voices || !voices.length) return null;
+
+                const ptVoices = voices.filter(v => String(v.lang || "").toLowerCase().startsWith("pt"));
+                const source = ptVoices.length ? ptVoices : voices;
+
+                const exact = source.find(v => normalizeKey(v.name) === hint);
+                if (exact) return exact;
+
+                const contains = source.find(v => normalizeKey(v.name).includes(hint));
+                if (contains) return contains;
+
+                const tokens = hint.split(/\s+/).filter(Boolean);
+                if (!tokens.length) return null;
+                return source.find(v => tokens.every(t => normalizeKey(v.name).includes(t))) || null;
+            }}
+
             function pickBestPortugueseVoice(voices) {{
                 if (!voices || !voices.length) return null;
+                const hinted = pickVoiceByHint(voices);
+                if (hinted) return hinted;
                 const ranked = voices
                     .map(v => ({{ v, score: scoreVoice(v) }}))
                     .filter(item => item.score > 0)
@@ -2797,8 +2900,11 @@ def render_story_audio_controls(story: str) -> None:
 
             if (payload.action === "speak" && payload.text) {{
                 synth.cancel();
-                const speak = () => {{
-                    if (synth.speaking) return;
+                const speak = (tries) => {{
+                    if (synth.speaking) {{
+                        if (tries > 0) setTimeout(() => speak(tries - 1), 80);
+                        return;
+                    }}
                     const utt = new SpeechSynthesisUtterance(normalizeNarrationText(payload.text));
                     utt.lang = "pt-BR";
                     utt.rate = Number(payload.rate || 0.94);
@@ -2809,12 +2915,15 @@ def render_story_audio_controls(story: str) -> None:
                     if (bestVoice) {{
                         utt.voice = bestVoice;
                     }}
+                    utt.onstart = () => {{
+                        window.__storyTtsLastVoiceName = bestVoice ? bestVoice.name : "default";
+                    }};
                     synth.speak(utt);
                 }};
 
-                speak();
+                speak(6);
                 if (synth.getVoices && synth.getVoices().length === 0) {{
-                    setTimeout(speak, 150);
+                    setTimeout(() => speak(6), 150);
                 }}
             }}
         }})();
@@ -2827,6 +2936,28 @@ def render_story_audio_controls(story: str) -> None:
 @st.dialog("Configuracoes da Narracao")
 def render_story_tts_settings_modal() -> None:
     st.caption("Ajuste a naturalidade da voz em portugues para a Narrativa da Rodada.")
+
+    voice_modes = ["Automatico", "Edge Natural"]
+    current_voice_mode = str(st.session_state.get("story_tts_voice_mode", "Automatico"))
+    if current_voice_mode not in voice_modes:
+        current_voice_mode = "Automatico"
+
+    selected_voice_mode = st.selectbox(
+        "Preferencia de voz no navegador",
+        voice_modes,
+        index=voice_modes.index(current_voice_mode),
+        key="story_tts_voice_mode_select",
+        help="No Microsoft Edge, escolha 'Edge Natural' para priorizar vozes Microsoft Online/Natural em portugues quando instaladas.",
+    )
+    st.session_state.story_tts_voice_mode = selected_voice_mode
+
+    voice_hint = st.text_input(
+        "Nome da voz (opcional)",
+        value=str(st.session_state.get("story_tts_voice_hint", "")),
+        key="story_tts_voice_hint_input",
+        help="Exemplo no Edge: Maria, Francisca, Antonio ou nome completo da voz instalada no sistema.",
+    )
+    st.session_state.story_tts_voice_hint = voice_hint.strip()
 
     presets = {
         "Lenta": 0.86,
@@ -2883,6 +3014,9 @@ def render_story_tts_settings_modal() -> None:
         f"Atual: velocidade {st.session_state.story_tts_rate:.2f} | "
         f"entonacao {st.session_state.story_tts_pitch:.2f} | "
         f"volume {st.session_state.story_tts_volume:.2f}"
+    )
+    st.caption(
+        "Dica: para maior naturalidade no Edge, instale vozes PT-BR no Windows e use 'Edge Natural'."
     )
 
 

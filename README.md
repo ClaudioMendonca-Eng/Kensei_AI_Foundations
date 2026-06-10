@@ -301,7 +301,7 @@ Pensamento AI-first                    Projeto capstone completo
 
 <p align="center">
     <a href="/semana-02/README.md" target="_blank"><img style="margin: 10px" height="500" width="800" src="img/02-Kensei_AI_Foundations_S02_Python_Zero.png" alt="Semana 2 - Python do Zero com Copiloto IA"/></a>
-    <p align="center"><strong style="color: #ff3b30;">Aviso: clique na imagem para acessar o material completo da semana 2 - Python do Zero com Copiloto IA</strong></p>
+    <p align="center"><img src = "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExa2JiNjhsb2ExeWR0dDBhYzF4ajVydWx1MXAzZnB1azM2bjY2aHRtMyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/f4UhEQp4ix2UNf1IbF/giphy.gif" width = 22><strong style="color: #ff3b30;">     Aviso: clique na imagem para acessar o material completo da semana 2 - Python do Zero com Copiloto IA</strong></p>
 </p>
 
 ---
@@ -341,7 +341,7 @@ Pensamento AI-first                    Projeto capstone completo
 
 <p align="center">
     <a href="/semana-03/README.md" target="_blank"><img style="margin: 10px" height="500" width="800" src="img/03-Kensei_AI_Foundations_S03_DADOS_PANDAS.png" alt="Semana 3 - Dados com Pandas"/></a>
-    <p align="center"><strong style="color: #ff3b30;">Aviso: clique na imagem para acessar o material completo da semana 3 - Dados com Pandas</strong></p>
+    <p align="center"><img src = "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExa2JiNjhsb2ExeWR0dDBhYzF4ajVydWx1MXAzZnB1azM2bjY2aHRtMyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/f4UhEQp4ix2UNf1IbF/giphy.gif" width = 22><strong style="color: #ff3b30;">     Aviso: clique na imagem para acessar o material completo da semana 3 - Dados com Pandas</strong></p>
 </p>
 
 ---
@@ -373,7 +373,7 @@ Pensamento AI-first                    Projeto capstone completo
 
 <p align="center">
     <a href="/semana-04/README.md" target="_blank"><img style="margin: 10px" height="500" width="800" src="img/04-Kensei_AI_Foundations_S04_APIS_IA.png" alt="Semana 4 - APIs de IA"/></a>
-    <p align="center"><strong style="color: #ff3b30;">Aviso: clique na imagem para acessar o material completo da semana 4 - APIs de IA</strong></p>    
+    <p align="center"><img src = "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExa2JiNjhsb2ExeWR0dDBhYzF4ajVydWx1MXAzZnB1azM2bjY2aHRtMyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/f4UhEQp4ix2UNf1IbF/giphy.gif" width = 22><strong style="color: #ff3b30;">     Aviso: clique na imagem para acessar o material completo da semana 4 - APIs de IA</strong></p>    
 </p>
 
 ---
@@ -407,7 +407,7 @@ Pensamento AI-first                    Projeto capstone completo
 
 <p align="center">
     <a href="/semana-05/README.md" target="_blank"><img style="margin: 10px" height="500" width="800" src="img/Kensei_AI_Foundations_S05_n8n.png" alt="Semana 5 - Automação com n8n"/></a>
-    <p align="center"><strong style="color: #ff3b30;">Aviso: clique na imagem para acessar o material completo da semana 5 - Automação com n8n</strong></p>
+    <p align="center"><img src = "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExa2JiNjhsb2ExeWR0dDBhYzF4ajVydWx1MXAzZnB1azM2bjY2aHRtMyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/f4UhEQp4ix2UNf1IbF/giphy.gif" width = 22><strong style="color: #ff3b30;">     Aviso: clique na imagem para acessar o material completo da semana 5 - Automação com n8n</strong></p>
 </p>
 
 ---
@@ -448,7 +448,7 @@ Pensamento AI-first                    Projeto capstone completo
 
 <p align="center">
     <a href="/semana-06/README.md" target="_blank"><img style="margin: 10px" height="500" width="800" src="./img/Kensei_AI_Foundations_S06_agentes.png" alt="Semana 6 - n8n + IA (Agentes Inteligentes)"/></a>
-    <p align="center"><strong style="color: #ff3b30;">Aviso: clique na imagem para acessar o material completo da semana 6 - n8n + IA (Agentes Inteligentes)</strong></p>
+    <p align="center"><img src = "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExa2JiNjhsb2ExeWR0dDBhYzF4ajVydWx1MXAzZnB1azM2bjY2aHRtMyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/f4UhEQp4ix2UNf1IbF/giphy.gif" width = 22><strong style="color: #ff3b30;">     Aviso: clique na imagem para acessar o material completo da semana 6 - n8n + IA (Agentes Inteligentes)</strong></p>
 </p>
 
 ---
@@ -487,7 +487,7 @@ Pensamento AI-first                    Projeto capstone completo
 
 <p align="center">
     <a href="/semana-07/README.md" target="_blank"><img style="margin: 10px" height="500" width="800" src="./img/Kensei_AI_Foundations_S07_Streamlit.png" alt="Semana 7 - Apps com Streamlit"/></a>
-    <p align="center"><strong style="color: #ff3b30;">Aviso: clique na imagem para acessar o material completo da semana 7 - Streamlit na prática</strong></p>
+    <p align="center"><img src = "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExa2JiNjhsb2ExeWR0dDBhYzF4ajVydWx1MXAzZnB1azM2bjY2aHRtMyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/f4UhEQp4ix2UNf1IbF/giphy.gif" width = 22><strong style="color: #ff3b30;">     Aviso: clique na imagem para acessar o material completo da semana 7 - Streamlit na prática</strong></p>
 </p>
 
 ---
@@ -541,7 +541,7 @@ Pensamento AI-first                    Projeto capstone completo
 
 <p align="center">
     <a href="/semana-08/README.md" target="_blank"><img style="margin: 10px" height="500" width="800" src="img/Kensei_AI_Foundations_S08_IA_Gratuita_Projeto_final.png" alt="Semana 8 - IA Gratuita e Projeto Final"/></a>
-    <p align="center"><strong style="color: #ff3b30;">Aviso: clique na imagem para acessar o material completo da semana 8 - IA Gratuita e Projeto Final</strong></p>
+    <p align="center"><img src = "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExa2JiNjhsb2ExeWR0dDBhYzF4ajVydWx1MXAzZnB1azM2bjY2aHRtMyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/f4UhEQp4ix2UNf1IbF/giphy.gif" width = 22><strong style="color: #ff3b30;">     Aviso: clique na imagem para acessar o material completo da semana 8 - IA Gratuita e Projeto Final</strong></p>
 </p>
 
 ---
@@ -566,6 +566,30 @@ Pensamento AI-first                    Projeto capstone completo
 - [`semana-08/projeto-final/RedTeam_BlueTeam_OSI_IA_card.py`](semana-08/projeto-final/RedTeam_BlueTeam_OSI_IA_card.py)
 
 ---
+### Projeto Final — Red Team vs Blue Team // Card Arena
+
+A proposta do app e ensinar conceitos de ataque e defesa (Red Team vs Blue Team) com uma experiencia visual estilo trading card game, usando IA para enriquecer explicacoes, contexto e interacao.
+
+<p align="center">
+    <a href="/semana-08/projeto-final/README.md" target="_blank"><img style="margin: 10px" height="500" width="800" src="img/Kensei_AI_Foundations_Projeto_final.png" alt="Projeto Final - Red Team vs Blue Team"/></a>
+    <p align="center"><img src = "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExa2JiNjhsb2ExeWR0dDBhYzF4ajVydWx1MXAzZnB1azM2bjY2aHRtMyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/f4UhEQp4ix2UNf1IbF/giphy.gif" width = 22><strong style="color: #ff3b30;">     Aviso: clique na imagem para acessar o material completo do Projeto Final - Red Team vs Blue Team</strong></p>
+</p>
+
+#### Demo online
+
+Jogue agora na versao publicada:
+
+- https://redteam-blueteam-osi-ia-card.streamlit.app/
+
+#### Descrição do Projeto
+- Jogo de cartas educacional para aprender conceitos de ataque e defesa em cybersecurity.
+- Cada carta representa uma técnica, ferramenta ou conceito de ataque (Red Team) ou defesa (Blue Team).
+- Jogadores escolhem cartas para simular cenários de segurança, com feedback imediato sobre eficácia.
+- Integração com IA para explicar o resultado de cada jogada e fornecer insights educacionais.
+- Suporte a múltiplos provedores de IA para comparação de respostas e análise de desempenho.
+
+
+
 ## Resumo
 
 [⬆ Voltar ao topo](#topo)
